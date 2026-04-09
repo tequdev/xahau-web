@@ -1,9 +1,8 @@
 ---
 title: Tarifas de Transacción
-description: >-
-  Los contratos inteligentes (Hooks) de Xahau requieren tarifas específicas para la transacción y el destino.
-  Puede obtener fácilmente la tarifa requerida del comando RPC `fee`.
+description: Los contratos inteligentes (Hooks) de Xahau requieren tarifas específicas para la transacción y el destino. Puede obtener fácilmente la tarifa requerida del comando RPC `fee`.
 ---
+
 import { Aside } from '@astrojs/starlight/components';
 
 Aunque las bibliotecas pueden encargarse de la determinación de tarifas por usted, al construir sus propias integraciones con la Red Xahau, es posible que deba implementar la determinación dinámica de tarifas basada en la transacción, la cuenta de origen y la cuenta de destino.
@@ -12,7 +11,7 @@ Dado que el remitente de una transacción tendrá que pagar las tarifas requerid
 
 ### Ayudante RPC de Tarifas
 
-Las tarifas de transacción en un ledger con la enmienda Hooks habilitada se vuelven no triviales para calcular para usuarios finales y/o aplicaciones de cartera. Esto se debe a que los hooks fuertes deben ser pagados por el originador de una transacción, y puede haber hasta 4 hooks fuertes en la cuenta remitente y 4 en la cuenta receptora, así como cualquier otra parte interesada transaccional fuerte involucrada (como puede ser el caso con algunos tipos de transacciones exóticas). Además, si la transacción es un SetHook, el tamaño de los parámetros, el tamaño del código y si es una operación _create_ o _install_ determinan el tamaño de la tarifa.
+Las tarifas de transacción en un ledger con la enmienda Hooks habilitada se vuelven no triviales para calcular para usuarios finales y/o aplicaciones de cartera. Esto se debe a que los hooks fuertes deben ser pagados por el originador de una transacción, y puede haber hasta 4 hooks fuertes en la cuenta remitente y 4 en la cuenta receptora, así como cualquier otra parte interesada transaccional fuerte involucrada (como puede ser el caso con algunos tipos de transacciones exóticas). Además, si la transacción es un SetHook, el tamaño de los parámetros, el tamaño del código y si es una operación *create* o *install* determinan el tamaño de la tarifa.
 
 Por lo tanto, se recomienda encarecidamente que **todas** las transacciones se ejecuten a través de la llamada RPC de tarifas actualizada antes de ser enviadas al ledger.
 
