@@ -1,12 +1,11 @@
 ---
 title: SetHook
-description: >-
-  La transacción SetHook permite a los usuarios instalar, actualizar, eliminar
-  o realizar otras operaciones en hooks en Xahau.
+description: La transacción SetHook permite a los usuarios instalar, actualizar, eliminar o realizar otras operaciones en hooks en Xahau.
 ---
-\[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/SetHook.cpp)]
 
-_(Añadido por la enmienda \[Hooks]\[].)_
+[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/SetHook.cpp)]
+
+*(Añadido por la enmienda [Hooks][].)*
 
 ### Ejemplo
 
@@ -32,10 +31,10 @@ _(Añadido por la enmienda \[Hooks]\[].)_
 }
 ```
 
-| Campo     | Tipo JSON | \[Tipo Interno]\[] | Descripción                                        |
-| --------- | --------- | ------------------- | -------------------------------------------------- |
-| `Account` | String    | AccountID           | La dirección de la cuenta que poseerá el hook.     |
-| `Hooks`   | Array     | Array               | El array de hooks a establecer.                    |
+| Campo     | Tipo JSON | [Tipo Interno][] | Descripción                                    |
+| --------- | --------- | ---------------- | ---------------------------------------------- |
+| `Account` | String    | AccountID        | La dirección de la cuenta que poseerá el hook. |
+| `Hooks`   | Array     | Array            | El array de hooks a establecer.                |
 
 ### Costo de Transacción Especial
 
@@ -45,20 +44,22 @@ La transacción SetHook tiene un costo de transacción estándar, que es el cost
 
 Además de los errores que pueden ocurrir para todas las transacciones, las transacciones SetHook pueden resultar en los siguientes códigos de resultado:
 
-| Código de Error | Descripción                                                                  |
-| --------------- | ---------------------------------------------------------------------------- |
-| `tecDUPLICATE`  | Ocurre si ya existe un hook con el mismo hash.                               |
+| Código de Error | Descripción                                                                           |
+| --------------- | ------------------------------------------------------------------------------------- |
+| `tecDUPLICATE`  | Ocurre si ya existe un hook con el mismo hash.                                        |
 | `tecDIR_FULL`   | Ocurre si el directorio del propietario está lleno y no puede acomodar el nuevo hook. |
-| `terNO_ACCOUNT` | Ocurre si la cuenta emisora no existe.                                       |
-| `terNO_HOOK`    | Ocurre si no existe ningún hook con el hash especificado.                    |
-| `temDISABLED`   | Ocurre si la Enmienda Hooks no está habilitada.                              |
-| `temMALFORMED`  | Ocurre si la transacción está malformada.                                    |
+| `terNO_ACCOUNT` | Ocurre si la cuenta emisora no existe.                                                |
+| `terNO_HOOK`    | Ocurre si no existe ningún hook con el hash especificado.                             |
+| `temDISABLED`   | Ocurre si la Enmienda Hooks no está habilitada.                                       |
+| `temMALFORMED`  | Ocurre si la transacción está malformada.                                             |
 
 ### Operaciones SetHook
 
 Hay seis operaciones posibles: Sin Operación, Crear, Actualizar, Eliminar, Instalar y Eliminar Espacio de Nombres
 
-Cada operación se especifica por la inclusión u omisión de ciertos campos del Objeto HookSet. Esencialmente, las operaciones HookSet son un tipo de **diff** entre los valores _predeterminados_, _existentes_ y los campos recién especificados de un Hook específico.
+Cada operación se especifica por la inclusión u omisión de ciertos campos del Objeto HookSet. Esencialmente, las operaciones HookSet son un tipo de **diff** entre los valores *predeterminados*, *existentes* y los campos recién especificados de un Hook específico.
+
+Achieving each type of operation is explained in a subsection below.
 
 ### Sin Operación
 
@@ -66,11 +67,13 @@ Cada operación se especifica por la inclusión u omisión de ciertos campos del
 
 * El Objeto HookSet está vacío
 
-**Comportamiento**:
+**Behaviour**:
 
 * No se realiza ningún cambio.
 
 **Ejemplo**:
+
+Indicadores
 
 ```json
 {
@@ -88,20 +91,26 @@ Cada operación se especifica por la inclusión u omisión de ciertos campos del
 
 ### Operación Crear
 
-**Ocurre cuando** _todas_ las condiciones siguientes se cumplen:
+**Comportamiento**:
 
-* El Hook Correspondiente no existe _o_ se especifica `FLAG_OVERRIDE`.
+**Ocurre cuando** *todas* las condiciones siguientes se cumplen:
+
+* El Hook Correspondiente no existe *o* se especifica `FLAG_OVERRIDE`.
 * El campo `CreateCode` está especificado y no está en blanco y contiene el bytecode WebAssembly válido para un Hook válido.
 * No existe ninguna instancia del mismo bytecode WebAssembly en el XRPL. (Si existe y todos los demás requisitos se cumplen, se interpreta como una Operación Instalar.)
 
-**Comportamiento**:
+**Behaviour**:
 
 * Se crea un objeto `HookDefinition` con conteo de referencias en el XRPL.
+* A `Hooks` array is created on the executing account, if it doesn't already exist. (This is the structure that contains the Corresponding Hooks.)
 * Se crea un array `Hooks` en la cuenta ejecutante, si no existe ya.
-* Se crea un objeto `Hook` en la posición del Hook Correspondiente si no existe ya.
-* El objeto `Hook` apunta a la `HookDefinition`.
+* `flags` está presente y `hsfNSDELETE` está activado.
+* El campo `HookParameters` es un array de objetos que especifican los parámetros del hook:
+* If `hsfNSDELETE` flag is specified then any HookState entires in the destination namespace are deleted if they currently exist.
 
 **Ejemplo**:
+
+JSON
 
 ```json
 {
@@ -124,12 +133,26 @@ Cada operación se especifica por la inclusión u omisión de ciertos campos del
 
 ### Operación Instalar
 
-**Ocurre cuando** _todas_ las condiciones siguientes se cumplen:
+**Occurs when**:
 
-* El Hook Correspondiente no existe _o_ se especifica `FLAG_OVERRIDE`.
-* El campo `HookHash` está especificado y no está en blanco y contiene el hash de un Hook que ya existe como `HookDefinition` en el ledger _o_ el campo `CreateCode` contiene bytecode WebAssembly válido para un hook que ya existe en el ledger como `HookDefinition`.
+**Ocurre cuando** *todas* las condiciones siguientes se cumplen:
+
+* El Hook Correspondiente no existe *o* se especifica `FLAG_OVERRIDE`.
+* El campo `HookHash` está especificado y no está en blanco y contiene el hash de un Hook que ya existe como `HookDefinition` en el ledger *o* el campo `CreateCode` contiene bytecode WebAssembly válido para un hook que ya existe en el ledger como `HookDefinition`.
+
+**Behaviour**:
+
+* The reference count of the `HookDefinition` object is incremented.
+* A `Hooks` array is created on the executing account, if it doesn't already exist. (This is the structure that contains the Corresponding Hooks.)
+* Se crea un objeto `Hook` en la posición del Hook Correspondiente si no existe ya.
+* El objeto `Hook` apunta a la `HookDefinition`.
+* El campo `HookGrants` es un array de objetos que especifican las concesiones asociadas con el hook:
+* A field or key-pair within a field is identical to the Hook Defaults set on the `HookDefinition`, in which case it is omitted due to defaults.
+* If `hsfNSDELETE` flag is specified then any HookState entires in the destination namespace are deleted if they currently exist.
 
 **Ejemplo**:
+
+JSON
 
 ```json
 {
@@ -151,14 +174,38 @@ Cada operación se especifica por la inclusión u omisión de ciertos campos del
 
 ### Operación Actualizar
 
-**Ocurre cuando** _todas_ las condiciones siguientes se cumplen:
+**Occurs when**:
+
+**Ocurre cuando** *todas* las condiciones siguientes se cumplen:
 
 * El Hook Correspondiente existe.
 * `HookHash` está ausente.
 * `CreateCode` está ausente.
 * Uno o más de `HookNamespace`, `HookParameters` o `HookGrants` está presente.
 
+**Comportamiento**:
+
+* The Corresponding Hook is updated in such a way that the desired changes are reflected in the Corresponding Hook.
+
+**Specific Behaviour**:
+
+If `HookNamespace` is specified and differs from the Corresponding Hook's Namespace:
+
+* the Corresponding Hook's `HookNamespace` is updated, and
+* if the `hsfNSDELETE` flag is specified all HookState entires in the old namespace are deleted.
+
+If `HookParameters` is specified, then for each entry:
+
+* If `HookParameterName` exists but `HookParameterValue` is absent and the Corresponding Hook's Parameters (either specifically or via defaults) contains this `HookParameterName` then the parameter is marked as deleted on the Corresponding Hook.
+* If `HookParameterName` exists and `HookParameterValue` exists then the Corresponding Hook's Parameters are modified to include the new or updated parameter.
+
+If `HookGrants` is specified then:
+
+* The Corresponding Hook's `HookGrants` array is replaced with the array.
+
 **Ejemplo**:
+
+JSON
 
 ```json
 {
@@ -178,7 +225,9 @@ Cada operación se especifica por la inclusión u omisión de ciertos campos del
 
 ### Operación Eliminar
 
-**Ocurre cuando** _todas_ las condiciones siguientes se cumplen:
+**Occurs when**:
+
+**Ocurre cuando** *todas* las condiciones siguientes se cumplen:
 
 * El Hook Correspondiente existe.
 * Se especifica `hsfOVERRIDE`.
@@ -186,7 +235,16 @@ Cada operación se especifica por la inclusión u omisión de ciertos campos del
 * `HookHash` está ausente.
 * `CreateCode` está presente pero vacío.
 
+**Behaviour**:
+
+* The reference count of the `HookDefinition` object is decremented.
+* If the reference count is now zero the `HookDefintion` is removed from the ledger.
+* The `Hook` object in the Corresponding Hook position is deleted, leaving an empty position.
+* If `hsfNSDELETE` is specified the namespace and all HookState entries are also deleted.
+
 **Ejemplo**:
+
+JSON
 
 ```json
 {
@@ -207,14 +265,24 @@ Cada operación se especifica por la inclusión u omisión de ciertos campos del
 
 ### Restablecimiento de Espacio de Nombres
 
-**Ocurre cuando** _todas_ las condiciones siguientes se cumplen:
+**Occurs when**:
 
-* `flags` está presente y `hsfNSDELETE` está activado.
+**Ocurre cuando** *todas* las condiciones siguientes se cumplen:
+
+* `flags` is present and `hsfNSDELETE` is set. `hsfOVERRIDE` can optionally also be specified if the Hook at this position is to be deleted.
 * `HookNamespace` está especificado.
 * `CreateCode` está ausente.
 * `HookHash` está ausente.
+* `HookGrants`, `HookParameters`, `HookOn` and `HookApiVersion` are absent.
+
+**Behaviour**:
+
+* If the Corresponding Hook exists, it remains, nothing happens to it.
+* A subset of HookState objects and the HookState directory for the specified namespace are removed from the ledger, up to the defined limit (512). Further transactions are needed to continue the deletion process until all relevant records are removed. See [`tesPARTIAL`](/docs/protocol-reference/transactions/transaction-results/tes-codes).&#x20;
 
 **Ejemplo**:
+
+Indicadores
 
 ```json
 {
@@ -235,57 +303,61 @@ Cada operación se especifica por la inclusión u omisión de ciertos campos del
 
 ### Campos del Hook
 
-| Campo            | Tipo JSON | Tipo Interno | Descripción                                       |
-| ---------------- | --------- | ------------ | ------------------------------------------------- |
-| `HookHash`       | String    | Hash256      | El hash del hook.                                 |
-| `CreateCode`     | String    | Blob         | El código WebAssembly del hook.                   |
-| `HookGrants`     | Array     | Array        | Las concesiones asociadas con el hook.            |
-| `HookNamespace`  | String    | Hash256      | El espacio de nombres del hook.                   |
-| `HookParameters` | Array     | Array        | Los parámetros del hook.                          |
-| `HookOn`         | String    | Hash256      | Las transacciones en las que se activa el hook.   |
-| `HookCanEmit`    | String    | Hash256      | Las transacciones que el hook puede emitir.       |
-| `HookApiVersion` | Number    | UInt16       | La versión de API del hook.                       |
-| `Flags`          | Number    | UInt32       | Indicadores adicionales para el hook.             |
+The following fields are used in the hook object:
 
-### Indicadores
+| Campo            | Tipo JSON | Tipo Interno | Descripción                                     |
+| ---------------- | --------- | ------------ | ----------------------------------------------- |
+| `HookHash`       | String    | Hash256      | El hash del hook.                               |
+| `CreateCode`     | String    | Blob         | El código WebAssembly del hook.                 |
+| `HookGrants`     | Array     | Array        | Las concesiones asociadas con el hook.          |
+| `HookNamespace`  | String    | Hash256      | El espacio de nombres del hook.                 |
+| `HookParameters` | Array     | Array        | Los parámetros del hook.                        |
+| `HookOn`         | String    | Hash256      | Las transacciones en las que se activa el hook. |
+| `HookCanEmit`    | String    | Hash256      | Las transacciones que el hook puede emitir.     |
+| `HookApiVersion` | Number    | UInt16       | La versión de API del hook.                     |
+| `Flags`          | Number    | UInt32       | Indicadores adicionales para el hook.           |
 
-| Nombre del Indicador | Descripción                                                              |
-| -------------------- | ------------------------------------------------------------------------ |
+### Flags
+
+The `Flags` field in the hook object specifies additional flags for the hook. The following flags are supported:
+
+| Nombre del Indicador | Descripción                                                                   |
+| -------------------- | ----------------------------------------------------------------------------- |
 | `hsfOVERRIDE`        | Permite que el hook sea eliminado aunque esté referenciado por otros objetos. |
-| `hsfNSDELETE`        | Elimina un espacio de nombres completo de hooks.                         |
-| `hsfCOLLECT`         | Recopila los objetos asociados del hook.                                 |
+| `hsfNSDELETE`        | Elimina un espacio de nombres completo de hooks.                              |
+| `hsfCOLLECT`         | Recopila los objetos asociados del hook.                                      |
 
 ### Concesiones del Hook
 
-El campo `HookGrants` es un array de objetos que especifican las concesiones asociadas con el hook:
+The `HookGrants` field is an array of objects that specify the grants associated with the hook. Each grant object has the following fields:
 
-| Campo       | Tipo JSON | Tipo Interno | Descripción                                        |
-| ----------- | --------- | ------------ | -------------------------------------------------- |
-| `HookHash`  | String    | Hash256      | El hook al que aplicar la concesión.               |
+| Campo       | Tipo JSON | Tipo Interno | Descripción                                           |
+| ----------- | --------- | ------------ | ----------------------------------------------------- |
+| `HookHash`  | String    | Hash256      | El hook al que aplicar la concesión.                  |
 | `Authorize` | String    | AccountID    | La dirección de la cuenta a la que se concede acceso. |
-| `Flags`     | Number    | Uint32       | Indicadores                                        |
+| `Flags`     | Number    | Uint32       | Flags                                                 |
 
 ### Parámetros del Hook
 
-El campo `HookParameters` es un array de objetos que especifican los parámetros del hook:
+The `HookParameters` field is an array of objects that specify the parameters of the hook. Each parameter object has the following fields:
 
-| Campo                | Tipo JSON | Tipo Interno | Descripción                 |
-| -------------------- | --------- | ------------ | --------------------------- |
-| `HookParameterName`  | String    | Blob         | El nombre del parámetro.    |
-| `HookParameterValue` | String    | Blob         | El valor del parámetro.     |
+| Campo                | Tipo JSON | Tipo Interno | Descripción              |
+| -------------------- | --------- | ------------ | ------------------------ |
+| `HookParameterName`  | String    | Blob         | El nombre del parámetro. |
+| `HookParameterValue` | String    | Blob         | El valor del parámetro.  |
 
 ### Ejecuciones del Hook
 
-Cuando los Hooks se ejecutan, dejan información sobre el estado de esa ejecución. Esto aparece en los metadatos de la Transacción Originadora como un bloque `sfHookExecutions`:
+Cuando los Hooks se ejecutan, dejan información sobre el estado de esa ejecución. Esto aparece en los metadatos de la Transacción Originadora como un bloque `sfHookExecutions`: This block contains the following fields:
 
-| Campo                  | Tipo JSON | Tipo Interno | Descripción                                                                                                                                                                  |
-| ---------------------- | --------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `HookAccount`          | String    | AccountID    | La cuenta en la que se ejecutó el Hook.                                                                                                                                      |
-| `HookEmitCount`        | Number    | UInt16       | El número total de Transacciones Emitidas producidas por el Hook.                                                                                                            |
-| `HookExecutionIndex`   | Number    | UInt16       | El SHA512H del Hook en el momento en que fue ejecutado.                                                                                                                      |
-| `HookHash`             | String    | Hash256      | El valor del parámetro.                                                                                                                                                      |
-| `HookInstructionCount` | String    | UInt64       | El número total de instrucciones WebAssembly que se ejecutaron cuando se ejecutó el Hook.                                                                                    |
-| `HookResult`           | Number    | UInt8        | Los Hooks pueden terminar de tres maneras: `accept`, `rollback` y `error`. ¡Esto _no_ es lo mismo que sfHookReturnCode!                                                     |
-| `HookReturnCode`       | String    | UInt64       | El entero devuelto como tercer parámetro de `accept` o `rollback`.                                                                                                           |
-| `HookReturnString`     | String    | Blob         | La cadena devuelta en los dos primeros parámetros de `accept` o `rollback`, si la hay.                                                                                       |
-| `HookStateChangeCount` | Number    | UInt16       | El número de cambios de Estado de Hook que el Hook realizó durante la ejecución.                                                                                             |
+| Campo                  | Tipo JSON | Tipo Interno | Descripción                                                                                                            |
+| ---------------------- | --------- | ------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `HookAccount`          | String    | AccountID    | La cuenta en la que se ejecutó el Hook.                                                                                |
+| `HookEmitCount`        | Number    | UInt16       | El número total de Transacciones Emitidas producidas por el Hook.                                                      |
+| `HookExecutionIndex`   | Number    | UInt16       | El SHA512H del Hook en el momento en que fue ejecutado.                                                                |
+| `HookHash`             | String    | Hash256      | El valor del parámetro.                                                                                                |
+| `HookInstructionCount` | String    | UInt64       | El número total de instrucciones WebAssembly que se ejecutaron cuando se ejecutó el Hook.                              |
+| `HookResult`           | Number    | UInt8        | Los Hooks pueden terminar de tres maneras: `accept`, `rollback` y `error`.¡Esto *no* es lo mismo que sfHookReturnCode! |
+| `HookReturnCode`       | String    | UInt64       | El entero devuelto como tercer parámetro de `accept` o `rollback`.                                                     |
+| `HookReturnString`     | String    | Blob         | La cadena devuelta en los dos primeros parámetros de `accept` o `rollback`, si la hay.                                 |
+| `HookStateChangeCount` | Number    | UInt16       | El número de cambios de Estado de Hook que el Hook realizó durante la ejecución.                                       |
