@@ -1,12 +1,11 @@
 ---
 title: CheckCancel
-description: >-
-  Cancela un Check no canjeado, eliminándolo del ledger sin enviar dinero.
-  La fuente o el destino del check pueden cancelarlo en cualquier momento.
+description: Cancela un Check no canjeado, eliminándolo del ledger sin enviar dinero. La fuente o el destino del check pueden cancelarlo en cualquier momento.
 ---
-\[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
 
-_(Añadido por la enmienda \[Checks]\[].)_
+[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
+
+*(Añadido por la enmienda [Checks][].)*
 
 ### Ejemplo
 
@@ -19,9 +18,9 @@ _(Añadido por la enmienda \[Checks]\[].)_
 }
 ```
 
-| Campo     | Tipo JSON | \[Tipo Interno]\[] | Descripción                                                                        |
-| --------- | --------- | ------------------- | ---------------------------------------------------------------------------------- |
-| `CheckID` | String    | Hash256             | El ID del objeto ledger Check a cancelar, como una cadena hexadecimal de 64 caracteres. |
+| Campo     | Tipo JSON | [Tipo Interno][] | Descripción                                                                             |
+| --------- | --------- | ---------------- | --------------------------------------------------------------------------------------- |
+| `CheckID` | String    | Hash256          | El ID del objeto ledger Check a cancelar, como una cadena hexadecimal de 64 caracteres. |
 
 ### Casos de Error
 
