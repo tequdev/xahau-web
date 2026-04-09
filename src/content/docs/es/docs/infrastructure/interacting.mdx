@@ -6,11 +6,7 @@ El software xahaud proporciona interfaces tanto WebSocket como RPC que pueden co
 
 ## Configuración de puertos WebSocket y RPC
 
-Para habilitar puertos de escucha, edita el archivo `xahaud.cfg`. Los puertos habilitados se enumeran en la sección `[server]` del archivo de configuración. Cada puerto listado bajo la sección `[server]` debe definirse además mediante su propia sección.
-
-Además de configurar puertos WebSocket o RPC, los administradores también pueden configurar el puerto utilizado para escuchar conexiones peer entrantes (`port_peer`). En servidores validadores, lo ideal es eliminar `port_peer` del archivo de configuración para evitar conexiones entrantes.
-
-Un archivo de configuración con el protocolo peer, un puerto WebSocket y un puerto RPC podría verse así:
+Para habilitar puertos de escucha, edita el archivo `xahaud.cfg`. Los puertos habilitados se enumeran en la sección `[server]` del archivo de configuración. Cada puerto listado bajo la sección `[server]` debe definirse además mediante su propia sección. Además de configurar puertos WebSocket o RPC, los administradores también pueden configurar el puerto utilizado para escuchar conexiones peer entrantes (`port_peer`). En servidores validadores, lo ideal es eliminar `port_peer` del archivo de configuración para evitar conexiones entrantes. Un archivo de configuración con el protocolo peer, un puerto WebSocket y un puerto RPC podría verse así:
 
 ```
 
@@ -38,6 +34,8 @@ port = 16007
 ip = ::
 
 ```
+
+<br />
 
 Opciones adicionales de configuración para conexiones WebSocket y RPC están disponibles en el [archivo de configuración de ejemplo](https://github.com/Xahau/xahaud/blob/dev/cfg/rippled-example.cfg).
 
