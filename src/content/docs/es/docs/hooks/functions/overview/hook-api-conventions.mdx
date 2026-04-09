@@ -1,15 +1,16 @@
 ---
 title: Convenciones de la API de Hooks
 ---
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### Convenciones de nomenclatura
 
 Todas las APIs de Hooks siguen una convención de nombres estándar:
 
-|           |                 |              |                 |
-| --------- | --------------- | ------------ | --------------- |
-| namespace | \[ _ sustantivo #1 ] | \[ _ verbo ] | \[ _ sustantivo #2 ] |
+|           |                     |             |                     |
+| --------- | ------------------- | ----------- | ------------------- |
+| namespace | [ _ sustantivo #1 ] | [ _ verbo ] | [ _ sustantivo #2 ] |
 
 Esto puede parecer confuso al principio, pero en realidad es bastante simple:
 
@@ -26,7 +27,7 @@ Por lo tanto:
 
 Cada Hook se ejecuta como un único frame de pila (stack frame). Toda la memoria de trabajo debe existir dentro de este frame. No hay heap ni memoria dinámica.
 
-Cuando los Hooks se comunican con `xahaud`, solo pueden pasar valores _enteros_. Normalmente estos enteros son punteros dentro de la memoria del Hook. Dado que el Hook se ejecuta dentro de xahaud, estos punteros pueden ser resueltos por xahaud y utilizados para escribir o leer datos según sea necesario para ejecutar la función de la API.
+Cuando los Hooks se comunican con `xahaud`, solo pueden pasar valores *enteros*. Normalmente estos enteros son punteros dentro de la memoria del Hook. Dado que el Hook se ejecuta dentro de xahaud, estos punteros pueden ser resueltos por xahaud y utilizados para escribir o leer datos según sea necesario para ejecutar la función de la API.
 
 ### Funciones permitidas
 
@@ -40,11 +41,11 @@ Todos los parámetros pasados a una API de Hook deben ser uno de los siguientes 
 
 Los parámetros de una API de Hook siempre siguen este orden:
 
-1. Puntero de escritura _si existe_
-2. Longitud de escritura _si existe_
-3. Puntero de lectura _si existe_
-4. Longitud de lectura _si existe_
-5. Campos específicos / adicionales _si existen_
+1. Puntero de escritura *si existe*
+2. Longitud de escritura *si existe*
+3. Puntero de lectura *si existe*
+4. Longitud de lectura *si existe*
+5. Campos específicos / adicionales *si existen*
 
 Algunas APIs solo escriben, otras solo leen, y algunas no hacen ninguna de las dos y devuelven únicamente un valor mediante el código de retorno.
 </TabItem>
@@ -54,9 +55,9 @@ Todos los parámetros pasados a una API de Hook deben ser uno de los siguientes 
 
 Los parámetros de una API de Hook siempre siguen este orden:
 
-1. Variable de escritura _si existe_
-2. Variable de lectura _si existe_
-3. Campos específicos / adicionales _si existen_
+1. Variable de escritura *si existe*
+2. Variable de lectura *si existe*
+3. Campos específicos / adicionales *si existen*
 
 Algunas APIs solo escriben, otras solo leen, y algunas no hacen ninguna de las dos y devuelven únicamente un valor mediante el código de retorno.
 </TabItem>
@@ -64,4 +65,4 @@ Algunas APIs solo escriben, otras solo leen, y algunas no hacen ninguna de las d
 
 ### Códigos de retorno
 
-Todas las APIs de Hooks devuelven un _entero con signo_. Puedes leer más sobre los códigos de retorno aquí: [Códigos de retorno](/es/docs/hooks/functions/overview/return-codes)
+Todas las APIs de Hooks devuelven un *entero con signo*. Puedes leer más sobre los códigos de retorno aquí: [Códigos de retorno](/es/docs/hooks/functions/overview/return-codes)
