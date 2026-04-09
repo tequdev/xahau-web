@@ -13,15 +13,15 @@ Por ejemplo, un campo `sfAmount` se serializa como una secuencia de bytes como `
 
 Para ayudar a los desarrolladores de Hooks a trabajar con objetos serializados, se creó el espacio de nombres `sto` dentro de la API de Hooks. Estas funciones manipulan punteros dentro de un buffer proporcionado por el Hook. Consulta la siguiente tabla:
 
-| Hook API                                                                    | Qué hace                                                                                 |
-| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Hook API                                                            | at it does                                                                                       |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | [sto_subfield](/es/docs/hooks/functions/serialization/sto_subfield) | Indexa dentro de un objeto serializado de xrpld y devuelve la posición y longitud de un subcampo |
-| [sto_subarray](/es/docs/hooks/functions/serialization/sto_subarray) | Indexa dentro de un array serializado de xrpld y devuelve la posición y longitud de un índice |
-| [sto_emplace](/es/docs/hooks/functions/serialization/sto_emplace)   | Inserta un campo en un STObject en su posición canónica                                  |
-| [sto_erase](/es/docs/hooks/functions/serialization/sto_erase)       | Elimina un campo de un STObject                                                          |
-| [sto_validate](/es/docs/hooks/functions/serialization/sto_validate) | Valida un STObject                                                                       |
+| [sto_subarray](/es/docs/hooks/functions/serialization/sto_subarray) | Indexa dentro de un array serializado de xrpld y devuelve la posición y longitud de un índice    |
+| [sto_emplace](/es/docs/hooks/functions/serialization/sto_emplace)   | Inserta un campo en un STObject en su posición canónica                                          |
+| [sto_erase](/es/docs/hooks/functions/serialization/sto_erase)       | Elimina un campo de un STObject                                                                  |
+| [sto_validate](/es/docs/hooks/functions/serialization/sto_validate) | Valida un STObject                                                                               |
 
-Cuando corresponde, estas APIs devuelven un _offset_ y una _longitud_ codificados en un único `int64_t`. Consulta la documentación específica para más detalles.
+Cuando corresponde, estas APIs devuelven un *offset* y una *longitud* codificados en un único `int64_t`. Consulta la documentación específica para más detalles.
 
 ### Ejemplo
 
@@ -43,7 +43,7 @@ for (int i = 0; GUARD(3), i < 3; ++i)
     uint32_t  memo_len = SUB_LENGTH(memo_lookup);
     // lo anterior ahora apunta al memo ... haz algo aquí
 }
-````
+```
 
 ### Solapamiento con slots
 
