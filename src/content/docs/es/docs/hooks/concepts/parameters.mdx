@@ -5,11 +5,11 @@ description: Los parámetros en tiempo de instalación permiten que los Hooks se
 
 ### Parámetros
 
-Los desarrolladores de Hooks pueden optar por utilizar parámetros en _tiempo de instalación_ (llamados Hook Parameters) en sus Hooks. Esto permite que quienes instalen posteriormente el Hook puedan modificar ciertos comportamientos definidos por el programador sin necesidad de recompilar o volver a subir el Hook (siempre que al menos una cuenta siga [referenciando](/es/docs/hooks/concepts/reference-counted-hook-definitions) la definición existente del Hook).
+Los desarrolladores de Hooks pueden optar por utilizar parámetros en *tiempo de instalación* (llamados Hook Parameters) en sus Hooks. Esto permite que quienes instalen posteriormente el Hook puedan modificar ciertos comportamientos definidos por el programador sin necesidad de recompilar o volver a subir el Hook (siempre que al menos una cuenta siga [referenciando](/es/docs/hooks/concepts/reference-counted-hook-definitions) la definición existente del Hook).
 
-Los Hook Parameters son un conjunto de pares clave-valor establecidos durante la [transacción SetHook](/es/docs/hooks/concepts/sethook-transaction) y recuperables por el Hook en tiempo de ejecución. Tanto `ParameterName` como `ParameterValue` se definen como blobs _hexadecimales_, con un tamaño máximo de 32 bytes y 256 bytes respectivamente.
+Los Hook Parameters son un conjunto de pares clave-valor establecidos durante la [transacción SetHook](/es/docs/hooks/concepts/sethook-transaction) y recuperables por el Hook en tiempo de ejecución. Tanto `ParameterName` como `ParameterValue` se definen como blobs *hexadecimales*, con un tamaño máximo de 32 bytes y 256 bytes respectivamente.
 
-Una [transacción SetHook](/es/docs/hooks/concepts/sethook-transaction) puede definir hasta _16_ parámetros por cada Hook instalado.
+Una [transacción SetHook](/es/docs/hooks/concepts/sethook-transaction) puede definir hasta *16* parámetros por cada Hook instalado.
 
 ### Establecer parámetros
 
@@ -37,7 +37,7 @@ Hooks:
     }   
 ],  
 ... 
-````
+```
 
 ### Parámetros por defecto
 
