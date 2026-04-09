@@ -1,9 +1,8 @@
 ---
 title: Burn 2 Mint (B2M)
-description: >-
-  Burn2Mint es una primitiva de intercadena de bajo nivel y está pensada para usuarios
-  empresariales que necesitan autoabastecer su propia liquidez según sus propios propósitos.
+description: Burn2Mint es una primitiva de intercadena de bajo nivel y está pensada para usuarios empresariales que necesitan autoabastecer su propia liquidez según sus propios propósitos.
 ---
+
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Aside type="caution">
@@ -28,7 +27,7 @@ Si no se siente cómodo asumiendo estos riesgos técnicos o no comprende lo que 
 
 ### Configuración
 
-Para realizar B2M, el usuario debe operar _dos_ nodos del protocolo XRPL:
+Para realizar B2M, el usuario debe operar *dos* nodos del protocolo XRPL:
 
 1. **Obtener xPOP de la quema**
 
@@ -52,24 +51,24 @@ Puede obtener/crear fácilmente xPOPs desde un nodo usando el repositorio anteri
 [**https://www.npmjs.com/package/xpop**](https://www.npmjs.com/package/xpop)
 </TabItem>
 
-<TabItem label='o: "Nodo de Quema" dedicado'>
+<TabItem label="o: &#x22;Nodo de Quema&#x22; dedicado">
 **Nodo de Quema**, que comprende:
 
 * Una instancia de Rippled modificada (modificada para registrar XPOPs)
 * Binario universal de linux aquí: [https://tvntezq.dlvr.cloud/rippled_with_xpop](https://tvntezq.dlvr.cloud/rippled_with_xpop)
 * [https://github.com/RichardAH/rippled/tree/proof-of-burn](https://github.com/RichardAH/rippled/tree/proof-of-burn)
 * Ejecutándose con un rippled.cfg que tiene:
-  * una estrofa **\[xpop_dir]** que especifica un directorio de salida para los XPOPs generados.
-  * una estrofa **\[network_id]** que especifica network_id: 1
+  * una estrofa **[xpop_dir]** que especifica un directorio de salida para los XPOPs generados.
+  * una estrofa **[network_id]** que especifica network_id: 1
     * (en producción esto sería la red 0)
-  *   un `validators.txt` que contiene:\\
+  * un `validators.txt` que contiene:\
 
-      ```
-      [validator_list_sites]
-      https://vl.altnet.rippletest.net
-      [validator_list_keys]
-      ED264807102805220DA0F312E71FC2C69E1552C9C5790F6C25E3729DEB573D5860
-      ```
+    ```
+    [validator_list_sites]
+    https://vl.altnet.rippletest.net
+    [validator_list_keys]
+    ED264807102805220DA0F312E71FC2C69E1552C9C5790F6C25E3729DEB573D5860
+    ```
 </TabItem>
 </Tabs>
 
@@ -175,17 +174,18 @@ console.log('     -->', b2mSubmitted.response.engine_result, b2mSubmitted.respon
 // Cerrando conexiones
 Object.keys(nodes).map(k => nodes[k].map(n => n.close()))
 ```
+
 [Fuente](https://gist.github.com/WietseWind/cd8a7a8c88f218fe7b768f59a665685d)
 
 ## Resumen Técnico del procedimiento B2M
 
 #### Nuevo Tipo de Transacción: `Import`
 
-Xahau Testnet (_network_id=21338_) introduce un nuevo tipo de transacción llamado _**Import**_, que acepta un XPOP de la cadena de testnet de Ripple (_network_id=1_) y proporciona una transferencia de valor unidireccional "burn-to-mint" y sincronización de claves/cuentas.
+Xahau Testnet (*network_id=21338*) introduce un nuevo tipo de transacción llamado ***Import***, que acepta un XPOP de la cadena de testnet de Ripple (*network_id=1*) y proporciona una transferencia de valor unidireccional "burn-to-mint" y sincronización de claves/cuentas.
 
 ### Transacción de Quema
 
-Una _**Transacción de Quema**_ es una transacción que quema XRP en una cadena XRPL fuente, la cual se usaría como prueba (XPOP) para acuñar en una cadena XRPL de destino.
+Una ***Transacción de Quema*** es una transacción que quema XRP en una cadena XRPL fuente, la cual se usaría como prueba (XPOP) para acuñar en una cadena XRPL de destino.
 
 Los siguientes tipos de transacciones son compatibles:
 
@@ -194,18 +194,18 @@ Los siguientes tipos de transacciones son compatibles:
 * SignerListSet.
 
 <Aside type="caution">
-Los Tickets _**no son aceptados**_ en **ninguna** Transacción de Quema y llevarían a que una Transacción de Quema sea inválida para acuñar. Para protegerse contra el spam, las transacciones deben validarse con un número de secuencia real y natural.
+Los Tickets ***no son aceptados*** en **ninguna** Transacción de Quema y llevarían a que una Transacción de Quema sea inválida para acuñar. Para protegerse contra el spam, las transacciones deben validarse con un número de secuencia real y natural.
 </Aside>
 
 Tenga en cuenta que otros tipos de transacciones no son actualmente compatibles y no pueden usarse para acuñar en Xahau Testnet. (Sin embargo, esto puede cambiar).
 
-Los tres tipos de transacciones pueden usarse para acuñar. Esto significa que la _**Tarifa**_ quemada por la Transacción de Quema se acuña posteriormente en Xahau Testnet después de un `Import` exitoso.
+Los tres tipos de transacciones pueden usarse para acuñar. Esto significa que la ***Tarifa*** quemada por la Transacción de Quema se acuña posteriormente en Xahau Testnet después de un `Import` exitoso.
 
 Si se usa `SetRegularKey` o `SignerListSet`, entonces la sincronización de claves ocurre de acuerdo con las reglas estándar del tipo de transacción. Si se usa `AccountSet`, entonces no se produce sincronización de claves en la cadena XRPL de destino (Xahau Testnet).
 
-Un campo llamado _**OperationLimit**_ debe estar presente en la Transacción de Quema para ser el ID de red de la cadena de destino. Este campo es para prevenir ataques de repetición en otras cadenas integradas con B2M.
+Un campo llamado ***OperationLimit*** debe estar presente en la Transacción de Quema para ser el ID de red de la cadena de destino. Este campo es para prevenir ataques de repetición en otras cadenas integradas con B2M.
 
-La Transacción de Quema puede usarse para Acuñar si tiene un código de transacción **tesSUCCESS** o _cualquiera_ de los códigos de transacción **tec**. Esto significa que _si_ se quemó la tarifa, entonces la transacción puede usarse para acuñar. Sin embargo, la sincronización de claves _solo_ ocurre cuando el resultado de la Transacción de Quema fue tesSUCCESS.
+La Transacción de Quema puede usarse para Acuñar si tiene un código de transacción **tesSUCCESS** o *cualquiera* de los códigos de transacción **tec**. Esto significa que *si* se quemó la tarifa, entonces la transacción puede usarse para acuñar. Sin embargo, la sincronización de claves *solo* ocurre cuando el resultado de la Transacción de Quema fue tesSUCCESS.
 
 Ejemplo de Transacción de Quema:
 
@@ -223,13 +223,13 @@ Antes de enviar la Transacción de Quema, asegúrese de que su Nodo de Quema est
 
 Después de verificar el estado de su Nodo de Quema, envíe la Transacción de Quema firmada al Nodo de Quema.
 
-El Nodo de Quema monitorea los ledgers cerrados en busca de transacciones que contengan el campo **OperationLimit** y usa los mensajes de validación recopilados para generar un XPOP (Prueba de Quema). Estos se escriben en un archivo bajo el directorio especificado en la estrofa **\[xpop_dir]** en el `rippled.cfg` del Nodo de Quema.
+El Nodo de Quema monitorea los ledgers cerrados en busca de transacciones que contengan el campo **OperationLimit** y usa los mensajes de validación recopilados para generar un XPOP (Prueba de Quema). Estos se escriben en un archivo bajo el directorio especificado en la estrofa **[xpop_dir]** en el `rippled.cfg` del Nodo de Quema.
 
 Espere a que el ledger cierre, luego busque en el xpop_dir el XPOP de la Transacción de Quema según su TXID. El archivo contiene un documento JSON, que es el XPOP que retransmitirá a la cadena XRPL de destino (HooksV3).
 
-Tome el contenido bruto de este archivo y codifíquelo como HEX. Esto se convertirá en el contenido del campo _Blob_ en la transacción `Import`.
+Tome el contenido bruto de este archivo y codifíquelo como HEX. Esto se convertirá en el contenido del campo *Blob* en la transacción `Import`.
 
-### Transacción de Acuñación
+### Mint Transaction
 
 Su codec binario estará al que le falten los campos necesarios para construir la transacción `Import` (Acuñación). Si está usando ripple-binary-codec, puede actualizar su archivo `definitions.json` de la siguiente manera:
 
@@ -239,7 +239,7 @@ Su codec binario estará al que le falten los campos necesarios para construir l
 4. Solicitud: `{"command":"server_definitions"}`
 5. Vuelque el contenido de la clave `"result"` en `definitions.json` del paso 2.
 
-El tipo de transacción `Import` toma solo un campo no común _**Blob.**_. Este debe contener el XPOP codificado en HEX de la fase de Recopilación de XPOP.
+El tipo de transacción `Import` toma solo un campo no común ***Blob.***. Este debe contener el XPOP codificado en HEX de la fase de Recopilación de XPOP.
 
 * Puede hacer esto con `cat xpopjsonfile | xxd -p | tr -d '\n'`
 
@@ -274,7 +274,7 @@ Si no está ejecutando su propio nodo de Acuñación:
 }
 ```
 
-O, si está ejecutando su propio nodo de Acuñación:
+Or, if you are running your own Mint node:
 
 * Asegúrese de que el Nodo de Acuñación esté ejecutándose y sincronizado con el ID de red 21338.
 * Use la llamada RPC `submit` para enviar la Transacción de Acuñación.
@@ -286,6 +286,6 @@ Si la Cuenta debe crearse en Xahau Testnet pero el manejo de claves para la cuen
 
 Si la Transacción de Quema es un `SignerListSet` o un `SetRegularKey`, y tuvo un resultado de transacción tesSUCCESS en la cadena XRPL fuente (testnet), esa misma operación de manejo de claves se aplica ahora a esa misma cuenta en la cadena XRPL de destino (Xahau Testnet).
 
-Durante las pruebas, las Cuentas en Xahau Testnet _pueden_ eliminarse; sin embargo, en la cadena de producción con Hooks habilitados, no podrán eliminarse.
+Durante las pruebas, las Cuentas en Xahau Testnet *pueden* eliminarse; sin embargo, en la cadena de producción con Hooks habilitados, no podrán eliminarse.
 
-Las Cuentas en Xahau Testnet tienen un campo opcional _**ImportSequence**_ en el AccountRoot. Si **Import** se ha usado alguna vez en esa cuenta en Xahau Testnet, este campo está presente y se rellena con el número de Sequence de la Transacción de Quema importada más recientemente. Esto es para prevenir ataques de repetición, pero también significa que nunca debe enviar sus Burn2Mints fuera de secuencia, de lo contrario las transacciones omitidas nunca serán aceptadas para Acuñar.
+Las Cuentas en Xahau Testnet tienen un campo opcional ***ImportSequence*** en el AccountRoot. Si **Import** se ha usado alguna vez en esa cuenta en Xahau Testnet, este campo está presente y se rellena con el número de Sequence de la Transacción de Quema importada más recientemente. Esto es para prevenir ataques de repetición, pero también significa que nunca debe enviar sus Burn2Mints fuera de secuencia, de lo contrario las transacciones omitidas nunca serán aceptadas para Acuñar.
