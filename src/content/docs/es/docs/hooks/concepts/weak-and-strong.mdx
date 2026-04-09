@@ -2,82 +2,100 @@
 title: Débil y Fuerte
 description: ¿Qué Hooks pueden ejecutarse y cuándo?
 ---
+
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="tip" title="Filosofía de diseño de Hooks">
   Toda parte afectada por una transacción debería tener la oportunidad de ejecutar sus Hooks.
 </Aside>
 
-Los Transactional Stake Holders (TSH) son las partes que tienen algún tipo de interés o se ven afectadas por una transacción. Su relación puede ser _débil_ o _fuerte_. El grado de conexión determina si tienen derecho a ejecutar sus Hooks y quién paga por esa ejecución.
+Los Transactional Stake Holders (TSH) son las partes que tienen algún tipo de interés o se ven afectadas por una transacción. Su relación puede ser *débil* o *fuerte*. El grado de conexión determina si tienen derecho a ejecutar sus Hooks y quién paga por esa ejecución.
 
 Por ejemplo:
 
-* En una transacción **Payment** directa de XAH, los TSH son la _cuenta originaria_ y la _cuenta destino_.
-* En una transacción **SetSignerList**, los TSH son la _cuenta originaria_ y cada cuenta incluida en la lista de firmantes.
+* En una transacción **Payment** directa de XAH, los TSH son la *cuenta originaria* y la *cuenta destino*.
+* En una transacción **SetSignerList**, los TSH son la *cuenta originaria* y cada cuenta incluida en la lista de firmantes.
 * En una transacción **OfferCreate**, las cuentas cuyas ofertas son cruzadas son TSH débiles.
-* Con la enmienda **IOUIssuerWeakTSH**, los emisores de moneda pueden ejecutar Hooks en transacciones de terceros si lo han activado.
+* With the **IOUIssuerWeakTSH** amendment, currency issuers have their hooks executed in third-party transactions that touch or mention their currency, if they have opted into weak execution.
 
-Debido a la diversidad de transacciones en Xahau, los TSH pueden ser complejos y poco intuitivos.
+Due to the heterogenous nature of transactions on Xahau, TSH come in all shapes and sizes and can be exotic and non-intuitive. This becomes more true as time passes and more transaction types are added to the Ledger.
 
 ### Débil y Fuerte
 
 Cada TSH tiene una conexión débil o fuerte:
 
-#### Conexión Fuerte
+A **Strong** connection means:
 
-1. La transacción paga la ejecución del Hook.
-2. Puede hacer rollback completo usando `rollback()`.
+1. The originating transaction must pay the fee for the execution of the TSH Hook Chain
+2. The TSH has the right to rollback the whole transaction by calling `rollback()` from their Hook during execution.
 
-#### Conexión Débil
+A **Weak** connection means:
 
 1. La transacción **no paga** la ejecución.
 2. El TSH paga su ejecución mediante [Collect Call Hooks](/es/docs/hooks/concepts/collect-call).
-3. Debe tener activado `asfTshCollect`.
+3. The TSH must have set an account flag `asfTshCollect` prior to the execution of the originating transaction.
 4. **No puede hacer rollback**, pero sí modificar estado o emitir transacciones.
 
 ### Antes o Después
 
-* Los Hooks **fuertes** se ejecutan **antes** de aplicar la transacción → pueden bloquearla.
-* Los Hooks **débiles** se ejecutan **después** → no pueden bloquearla pero acceden al metadata.
+Strong TSHes have their hooks executed *before* the originating transaction is applied to the ledger. This means they have the ability to [rollback](/docs/hooks/functions/control/rollback) the transaction (because it hasn't yet been applied.) This gives strongly executed hooks the ability to completely block a transaction from occurring.
+
+Weak TSHes have their hooks executed *after* the originating transaction has been applied to the ledger. This means they have access to the [transaction metadata](/docs/hooks/functions/originating-transaction/meta_slot) but cannot prevent the transaction from occurring.
 
 <Aside type="tip">
-  Hooks fuertes pueden usar <code>hook_again</code> para ejecutarse después como débiles.
+  Los Hooks **fuertes** se ejecutan **antes** de aplicar la transacción → pueden bloquearla.
 </Aside>
 
 ### Contexto de ejecución
 
-El parámetro `uint32_t` indica el contexto:
+The `uint32_t` parameter in `hook(uint32_t)` and `cbak(uint32_t)` carries important context information from the Hooks Amendment to your Hook.
 
-#### En `hook`:
+During the execution of `hook`:
 
-* 0 → ejecución fuerte  
-* 1 → ejecución débil  
-* 2 → débil tras `hook_again`
+* 0 means the Hook is being executed *strongly*
+* 1 means the Hook is being executed *weakly*
+* 2 means the Hook is being executed *weakly* after being executed *strongly* due to a [hook_again](/docs/hooks/functions/hook-context/hook_again) call.
 
-#### En `cbak`:
+During the execution of `cbak`:
 
-* 0 → transacción emitida aceptada  
-* 1 → transacción emitida fallida  
+* 0 means the Hook is being called back after a transaction it emitted was successfully accepted into a ledger.
+* 1 means the Hook is being called back after a transaction it emitted was marked as never able to be applied to any ledger (EmitFailure).
 
 ### Tabla de referencia
 
 Si una transacción no aparece, solo tiene como TSH a la cuenta originaria.
 
-| Tipo de transacción | Tipo TSH | Quién es el TSH |
-|--------------------|---------|----------------|
-| AccountDelete | Fuerte | Cuenta destino |
-| AccountSet | Ninguno | N/A |
-| CheckCancel | Débil | Cuenta destino |
-| CheckCreate | Fuerte | Cuenta destino |
-| ClaimReward | Fuerte | Emisor |
-| DepositPreauth | Fuerte | Cuenta autorizada |
-| EscrowCreate | Fuerte | Cuenta destino |
-| OfferCreate | Débil | Cuentas cruzadas |
-| Payment | Fuerte + Débil | Destino (fuerte), intermediarios (débil) |
-| SetHook | Ninguno | N/A |
-| TrustSet | Débil | Emisor |
-
-### Tablas detalladas
+| Tipo de transacción     | Tipo TSH                                                                                                                            | Quién es el TSH                                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| AccountDelete           | Hooks fuertes pueden usar <code>hook_again</code> para ejecutarse después como débiles.                                             | Destination account funds are paid out to after deletion                                          |
+| AccountSet              | Los Hooks **débiles** se ejecutan **después** → no pueden bloquearla pero acceden al metadata.                                      | N/A                                                                                               |
+| CheckCancel             | Débil                                                                                                                               | Cuenta destino                                                                                    |
+| CheckCash               | Ninguno                                                                                                                             | N/A                                                                                               |
+| CheckCreate             | Fuerte                                                                                                                              | Cuenta destino                                                                                    |
+| ClaimReward             | Fuerte                                                                                                                              | 1 → transacción emitida fallida                                                                   |
+| DepositPreauth          | Fuerte                                                                                                                              | Cuenta autorizada                                                                                 |
+| EscrowCancel            | Con la enmienda **IOUIssuerWeakTSH**, los emisores de moneda pueden ejecutar Hooks en transacciones de terceros si lo han activado. | Tablas detalladas                                                                                 |
+| EscrowCreate            | Fuerte                                                                                                                              | Debido a la diversidad de transacciones en Xahau, los TSH pueden ser complejos y poco intuitivos. |
+| EscrowFinish            | Fuerte                                                                                                                              | La transacción paga la ejecución del Hook.                                                        |
+| GenesisMint             | Débil                                                                                                                               | Each Destination in the GenesisMints Array                                                        |
+| Import                  | Fuerte                                                                                                                              | Conexión Débil                                                                                    |
+| Invoke                  | Fuerte                                                                                                                              | Destination account                                                                               |
+| OfferCancel             | Ninguno                                                                                                                             | N/A                                                                                               |
+| OfferCreate             | Débil                                                                                                                               | Accounts whose offers were crossed by this action.                                                |
+| Payment                 | Fuerte + Débil                                                                                                                      | Strong: Destination account. Weak: Any non-issuer the payment is rippled through.                 |
+| PaymentChannelClaim     | Débil                                                                                                                               | Cuenta destino                                                                                    |
+| PaymentChannelCreate    | Fuerte                                                                                                                              | El parámetro `uint32_t` indica el contexto:                                                       |
+| PaymentChannelFund      | Débil                                                                                                                               | Cuenta destino                                                                                    |
+| SetHook                 | Ninguno                                                                                                                             | N/A                                                                                               |
+| SetRegularKey           | Fuerte                                                                                                                              | The account whose address is being set as the key.                                                |
+| SignerListSet           | Fuerte                                                                                                                              | Accounts whose addresses are set as signing keys (if they exist and have Hooks set on them).      |
+| TicketCreate            | Ninguno                                                                                                                             | N/A                                                                                               |
+| TrustSet                | Débil                                                                                                                               | Cuentas cruzadas                                                                                  |
+| URITokenCancelSellOffer | None                                                                                                                                | N/A                                                                                               |
+| URITokenCreateSellOffer | Strong                                                                                                                              | Destination account, Issuer if tfBurnable Flag is set                                             |
+| URITokenBurn            | Strong                                                                                                                              | Issuer if tfBurnable Flag is set                                                                  |
+| URITokenBuy             | Strong                                                                                                                              | Owner account, Issuer if tfBurnable Flag is set                                                   |
+| URITokenMint            | None                                                                                                                                | N/A                                                                                               |
 
 **AccountSet**
 
@@ -87,30 +105,137 @@ Si una transacción no aparece, solo tiene como TSH a la cuenta originaria.
 
 **AccountDelete**
 
-| OTXN    | TSH         | AccountDelete |
-| ------- | ----------- | ------------- |
-| Account | Account     | Ninguno       |
-| Account | Beneficiario| Fuerte        |
+| OTXN    | TSH          | AccountDelete |
+| ------- | ------------ | ------------- |
+| Account | Account      | Ninguno       |
+| Account | Beneficiario | Fuerte        |
+
+**Check**
+
+| OTXN        | TSH         | CheckCancel | CheckCreate | CheckCash |
+| ----------- | ----------- | ----------- | ----------- | --------- |
+| Account     | Account     | Fuerte      | Strong      | Ninguno   |
+| Account     | Destino     | Fuerte      | Strong      | Ninguno   |
+| Destination | Destination | Débil       | None        | Strong    |
+| Destination | Account     | Weak        | None        | Weak      |
+
+**ClaimReward**
+
+| OTXN    | TSH     | ClaimReward |
+| ------- | ------- | ----------- |
+| Account | Account | Fuerte      |
+| Account | Issuer  | Débil       |
+
+**DepositPreauth**
+
+| OTXN    | TSH                              | DepositPreauth |
+| ------- | -------------------------------- | -------------- |
+| Account | Account                          | Strong         |
+| Account | 0 → transacción emitida aceptada | Strong         |
+
+**Escrow**
+
+| OTXN        | TSH                                      | EscrowCancel | EscrowCreate | EscrowFinish |
+| ----------- | ---------------------------------------- | ------------ | ------------ | ------------ |
+| Account     | Account                                  | Strong       | Strong       | Strong       |
+| Account     | Destino (fuerte), intermediarios (débil) | Weak         | Strong       | Weak         |
+| Destination | Destination                              | Strong       | None         | Strong       |
+| Destination | Account                                  | Weak         | None         | Weak         |
+
+**GenesisMint**
+
+| OTXN    | TSH         | GenesisMint |
+| ------- | ----------- | ----------- |
+| Account | Account     | Strong      |
+| Account | Destination | Strong      |
+| Account | Beneficiary | Weak        |
+
+**Import**
+
+| OTXN    | TSH     | Import |
+| ------- | ------- | ------ |
+| Account | Account | Strong |
+| Account | Issuer  | Strong |
+
+**Invoke**
+
+| OTXN    | TSH         | Invoke |
+| ------- | ----------- | ------ |
+| Account | Account     | Strong |
+| Account | Destination | Weak   |
+
+**Offer**
+
+| OTXN    | TSH     | OfferCancel | OfferCreate |
+| ------- | ------- | ----------- | ----------- |
+| Account | Account | Strong      | Strong      |
+| Account | Cruzado | None        | Weak        |
 
 **Payment**
 
-| OTXN    | TSH         | Payment |
-| ------- | ----------- | ------- |
-| Account | Account     | Fuerte  |
-| Account | Destino     | Fuerte  |
-| Account | Cruzado     | Débil   |
+| OTXN    | TSH                                                | Payment |
+| ------- | -------------------------------------------------- | ------- |
+| Account | Account                                            | Strong  |
+| Account | Destination                                        | Strong  |
+| Account | Puede hacer rollback completo usando `rollback()`. | Weak    |
+
+**PaymentChannel**
+
+| OTXN        | TSH         | PaymentChannelClaim | PaymentChannelCreate | PaymentChannelFund |
+| ----------- | ----------- | ------------------- | -------------------- | ------------------ |
+| Account     | Account     | Strong              | Strong               | Strong             |
+| Account     | Destination | Weak                | Strong               | Weak               |
+| Destination | Destination | Strong              | None                 | None               |
+| Destination | Account     | Weak                | None                 | None               |
+
+**SetHook**
+
+| OTXN    | TSH     | SetHook |
+| ------- | ------- | ------- |
+| Account | Account | Strong  |
+
+**SetRegularKey**
+
+| OTXN    | TSH        | SetRegularKey |
+| ------- | ---------- | ------------- |
+| Account | Account    | Strong        |
+| Account | RegularKey | Strong        |
+
+**SignerListSet**
+
+| OTXN    | TSH     | SignerListSet |
+| ------- | ------- | ------------- |
+| Account | Account | Strong        |
+| Account | Signer  | Strong        |
+
+**Ticket**
+
+| OTXN    | TSH     | TicketCreate |
+| ------- | ------- | ------------ |
+| Account | Account | Strong       |
 
 **TrustSet**
 
 | OTXN    | TSH     | TrustSet |
 | ------- | ------- | -------- |
-| Account | Account | Fuerte   |
-| Account | Emisor  | Débil    |
+| Account | Account | Strong   |
+| Account | Issuer  | Weak     |
 
 **URIToken**
 
-| OTXN   | Burnable | TSH    | Mint   | Burn   | Buy    | Sell   | Cancel |
-| ------ | -------- | ------ | ------ | ------ | ------ | ------ | ------ |
-| Owner  | False    | Owner  | Ninguno| Fuerte | Fuerte | Fuerte | Fuerte |
-| Owner  | False    | Issuer | Ninguno| Débil  | Débil  | Débil  | Ninguno|
-| Owner  | True     | Issuer | Ninguno| Débil  | Fuerte | Fuerte | Ninguno|
+| OTXN   | Burnable | TSH    | Mint                        | Burn            | Buy                                  | Sell                | Cancel     |
+| ------ | -------- | ------ | --------------------------- | --------------- | ------------------------------------ | ------------------- | ---------- |
+| Owner  | False    | Owner  | None                        | Strong          | Strong                               | Strong              | Strong     |
+| Owner  | False    | Issuer | None                        | Weak            | Weak                                 | Weak                | None       |
+| Owner  | False    | Buyer  | None                        | None            | None                                 | Strong              | Weak       |
+| Owner  | True     | Buyer  | None                        | None            | None                                 | Strong              | En `cbak`: |
+| Owner  | True     | Owner  | None                        | Strong          | Strong                               | Strong              | Strong     |
+| Owner  | True     | Issuer | None                        | En `hook`:      | Debe tener activado `asfTshCollect`. | 1 → ejecución débil | None       |
+| Issuer | False    | Owner  | None                        | None            | None                                 | None                | None       |
+| Issuer | False    | Issuer | 2 → débil tras `hook_again` | None            | None                                 | None                | None       |
+| Issuer | False    | Buyer  | Emisor                      | None            | None                                 | None                | None       |
+| Issuer | True     | Owner  | None                        | Emisor          | None                                 | None                | None       |
+| Issuer | True     | Issuer | 0 → ejecución fuerte        | Conexión Fuerte | None                                 | None                | None       |
+| Issuer | True     | Buyer  | Emisor                      | None            | None                                 | None                | None       |
+| Buyer  | True     | Buyer  | None                        | None            | Fuerte                               | None                | None       |
+| Buyer  | True     | Owner  | None                        | None            | Débil                                | None                | Ninguno    |
