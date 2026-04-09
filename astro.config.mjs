@@ -7,6 +7,9 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 import starlightLlmsTxt from 'starlight-llms-txt'
 import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
+import sidebarEn from './src/i18n/sidebar/en.json'
+import sidebarEs from './src/i18n/sidebar/es.json'
+import sidebarJa from './src/i18n/sidebar/ja.json'
 import { remarkGlobalReferences } from './src/plugins/remarkGlobalReferences'
 
 // https://astro.build/config
@@ -73,48 +76,51 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: 'Get started',
-          translations: { es: 'Primeros pasos', ja: 'はじめる' },
+          label: sidebarEn.get_started,
+          translations: {
+            es: sidebarEs.get_started,
+            ja: sidebarJa.get_started,
+          },
           items: ['docs', 'docs/what-is-different'],
         },
         {
-          label: 'Features',
-          translations: { es: 'Características', ja: '機能' },
+          label: sidebarEn.features,
+          translations: { es: sidebarEs.features, ja: sidebarJa.features },
           items: [
             'docs/features/public-nodes-rpc',
             'docs/features/amendments',
             {
-              label: 'Transaction Signing',
+              label: sidebarEn.transaction_signing,
               translations: {
-                es: 'Firma de Transacciones',
-                ja: 'トランザクション署名',
+                es: sidebarEs.transaction_signing,
+                ja: sidebarJa.transaction_signing,
               },
               autogenerate: { directory: 'docs/features/transaction-signing' },
               collapsed: true,
             },
             {
-              label: 'Developer Tooling',
+              label: sidebarEn.developer_tooling,
               translations: {
-                es: 'Herramientas para Desarrolladores',
-                ja: '開発者ツール',
+                es: sidebarEs.developer_tooling,
+                ja: sidebarJa.developer_tooling,
               },
               autogenerate: { directory: 'docs/features/developer-tooling' },
               collapsed: true,
             },
             {
-              label: 'HTTP / WebSocket APIs',
+              label: sidebarEn.http_websocket_apis,
               translations: {
-                es: 'APIs HTTP / WebSocket',
-                ja: 'HTTP / WebSocket API',
+                es: sidebarEs.http_websocket_apis,
+                ja: sidebarJa.http_websocket_apis,
               },
               autogenerate: { directory: 'docs/features/http-websocket-apis' },
               collapsed: true,
             },
             {
-              label: 'Network Features',
+              label: sidebarEn.network_features,
               translations: {
-                es: 'Funcionalidades de Red',
-                ja: 'ネットワーク機能',
+                es: sidebarEs.network_features,
+                ja: sidebarJa.network_features,
               },
               autogenerate: { directory: 'docs/features/network-features' },
               collapsed: true,
@@ -127,23 +133,26 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Protocol Reference',
+          label: sidebarEn.protocol_reference,
           translations: {
-            es: 'Referencia del Protocolo',
-            ja: 'プロトコルリファレンス',
+            es: sidebarEs.protocol_reference,
+            ja: sidebarJa.protocol_reference,
           },
           items: [
             {
-              label: 'Transactions',
-              translations: { es: 'Transacciones', ja: 'トランザクション' },
+              label: sidebarEn.transactions,
+              translations: {
+                es: sidebarEs.transactions,
+                ja: sidebarJa.transactions,
+              },
               collapsed: true,
               items: [
                 'docs/protocol-reference/transactions',
                 {
-                  label: 'Transaction Types',
+                  label: sidebarEn.transaction_types,
                   translations: {
-                    es: 'Tipos de Transacción',
-                    ja: 'トランザクションタイプ',
+                    es: sidebarEs.transaction_types,
+                    ja: sidebarJa.transaction_types,
                   },
                   autogenerate: {
                     directory:
@@ -152,10 +161,10 @@ export default defineConfig({
                   collapsed: true,
                 },
                 {
-                  label: 'Pseudo Transaction Types',
+                  label: sidebarEn.pseudo_transaction_types,
                   translations: {
-                    es: 'Tipos de Pseudotransacción',
-                    ja: '擬似トランザクションタイプ',
+                    es: sidebarEs.pseudo_transaction_types,
+                    ja: sidebarJa.pseudo_transaction_types,
                   },
                   autogenerate: {
                     directory:
@@ -164,10 +173,10 @@ export default defineConfig({
                   collapsed: true,
                 },
                 {
-                  label: 'Transaction Results',
+                  label: sidebarEn.transaction_results,
                   translations: {
-                    es: 'Resultados de Transacción',
-                    ja: 'トランザクション結果',
+                    es: sidebarEs.transaction_results,
+                    ja: sidebarJa.transaction_results,
                   },
                   autogenerate: {
                     directory:
@@ -180,16 +189,19 @@ export default defineConfig({
               ],
             },
             {
-              label: 'Ledger Data',
-              translations: { es: 'Datos del Ledger', ja: 'レジャーデータ' },
+              label: sidebarEn.ledger_data,
+              translations: {
+                es: sidebarEs.ledger_data,
+                ja: sidebarJa.ledger_data,
+              },
               collapsed: true,
               items: [
                 'docs/protocol-reference/ledger-data',
                 {
-                  label: 'Ledger Objects Types',
+                  label: sidebarEn.ledger_objects_types,
                   translations: {
-                    es: 'Tipos de Objetos del Ledger',
-                    ja: 'レジャーオブジェクトタイプ',
+                    es: sidebarEs.ledger_objects_types,
+                    ja: sidebarJa.ledger_objects_types,
                   },
                   autogenerate: {
                     directory:
@@ -202,8 +214,11 @@ export default defineConfig({
               ],
             },
             {
-              label: 'Data Types',
-              translations: { es: 'Tipos de Datos', ja: 'データ型' },
+              label: sidebarEn.data_types,
+              translations: {
+                es: sidebarEs.data_types,
+                ja: sidebarJa.data_types,
+              },
               collapsed: true,
               items: [
                 'docs/protocol-reference/data-types',
@@ -219,8 +234,8 @@ export default defineConfig({
           items: [
             'docs/hooks',
             {
-              label: 'Concepts',
-              translations: { es: 'Conceptos', ja: 'コンセプト' },
+              label: sidebarEn.concepts,
+              translations: { es: sidebarEs.concepts, ja: sidebarJa.concepts },
               collapsed: true,
               items: [
                 'docs/hooks/concepts/introduction',
@@ -247,21 +262,27 @@ export default defineConfig({
               ],
             },
             {
-              label: 'Functions',
-              translations: { es: 'Funciones', ja: '関数' },
+              label: sidebarEn.functions,
+              translations: {
+                es: sidebarEs.functions,
+                ja: sidebarJa.functions,
+              },
               collapsed: true,
               items: [
                 {
-                  label: 'Overview',
-                  translations: { es: 'Descripción General', ja: '概要' },
+                  label: sidebarEn.overview,
+                  translations: {
+                    es: sidebarEs.overview,
+                    ja: sidebarJa.overview,
+                  },
                   collapsed: true,
                   autogenerate: { directory: 'docs/hooks/functions/overview' },
                 },
                 {
-                  label: 'Developer Defined',
+                  label: sidebarEn.developer_defined,
                   translations: {
-                    es: 'Definidas por el Desarrollador',
-                    ja: '開発者定義',
+                    es: sidebarEs.developer_defined,
+                    ja: sidebarJa.developer_defined,
                   },
                   collapsed: true,
                   autogenerate: {
@@ -274,16 +295,19 @@ export default defineConfig({
                   autogenerate: { directory: 'docs/hooks/functions/control' },
                 },
                 {
-                  label: 'Utilities',
-                  translations: { es: 'Utilidades', ja: 'ユーティリティ' },
+                  label: sidebarEn.utilities,
+                  translations: {
+                    es: sidebarEs.utilities,
+                    ja: sidebarJa.utilities,
+                  },
                   collapsed: true,
                   autogenerate: { directory: 'docs/hooks/functions/utilities' },
                 },
                 {
-                  label: 'Serialization',
+                  label: sidebarEn.serialization,
                   translations: {
-                    es: 'Serialización',
-                    ja: 'シリアライゼーション',
+                    es: sidebarEs.serialization,
+                    ja: sidebarJa.serialization,
                   },
                   collapsed: true,
                   autogenerate: {
@@ -291,10 +315,10 @@ export default defineConfig({
                   },
                 },
                 {
-                  label: 'Emitted Transaction',
+                  label: sidebarEn.emitted_transaction,
                   translations: {
-                    es: 'Transacción Emitida',
-                    ja: '発行トランザクション',
+                    es: sidebarEs.emitted_transaction,
+                    ja: sidebarJa.emitted_transaction,
                   },
                   collapsed: true,
                   autogenerate: {
@@ -312,10 +336,10 @@ export default defineConfig({
                   autogenerate: { directory: 'docs/hooks/functions/ledger' },
                 },
                 {
-                  label: 'Hook Context',
+                  label: sidebarEn.hook_context,
                   translations: {
-                    es: 'Contexto del Hook',
-                    ja: 'フックコンテキスト',
+                    es: sidebarEs.hook_context,
+                    ja: sidebarJa.hook_context,
                   },
                   collapsed: true,
                   autogenerate: {
@@ -328,16 +352,16 @@ export default defineConfig({
                   autogenerate: { directory: 'docs/hooks/functions/slot' },
                 },
                 {
-                  label: 'State',
-                  translations: { es: 'Estado', ja: '状態' },
+                  label: sidebarEn.state,
+                  translations: { es: sidebarEs.state, ja: sidebarJa.state },
                   collapsed: true,
                   autogenerate: { directory: 'docs/hooks/functions/state' },
                 },
                 {
-                  label: 'Trace (Debug)',
+                  label: sidebarEn.trace_debug,
                   translations: {
-                    es: 'Traza (Debug)',
-                    ja: 'トレース（デバッグ）',
+                    es: sidebarEs.trace_debug,
+                    ja: sidebarJa.trace_debug,
                   },
                   collapsed: true,
                   autogenerate: {
@@ -345,10 +369,10 @@ export default defineConfig({
                   },
                 },
                 {
-                  label: 'Originating Transaction',
+                  label: sidebarEn.originating_transaction,
                   translations: {
-                    es: 'Transacción de Origen',
-                    ja: '発信トランザクション',
+                    es: sidebarEs.originating_transaction,
+                    ja: sidebarJa.originating_transaction,
                   },
                   collapsed: true,
                   autogenerate: {
@@ -371,16 +395,19 @@ export default defineConfig({
           items: ['docs/data-apis', ...openAPISidebarGroups],
         },
         {
-          label: 'Compliance',
-          translations: { es: 'Cumplimiento', ja: 'コンプライアンス' },
+          label: sidebarEn.compliance,
+          translations: { es: sidebarEs.compliance, ja: sidebarJa.compliance },
           items: [
             'docs/compliance/security-audit',
             'docs/compliance/responsible-disclosure',
           ],
         },
         {
-          label: 'Infrastructure',
-          translations: { es: 'Infraestructura', ja: 'インフラストラクチャ' },
+          label: sidebarEn.infrastructure,
+          translations: {
+            es: sidebarEs.infrastructure,
+            ja: sidebarJa.infrastructure,
+          },
           items: [
             'docs/infrastructure/system-requirements',
             'docs/infrastructure/installing-xahaud',
@@ -390,10 +417,10 @@ export default defineConfig({
             'docs/infrastructure/interacting',
             'docs/infrastructure/advanced-configuration',
             {
-              label: 'Build xahaud (Advanced)',
+              label: sidebarEn.build_xahaud,
               translations: {
-                es: 'Compilar xahaud (Avanzado)',
-                ja: 'xahaudをビルド（上級）',
+                es: sidebarEs.build_xahaud,
+                ja: sidebarJa.build_xahaud,
               },
               collapsed: true,
               items: [
@@ -405,13 +432,13 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Resources',
-          translations: { es: 'Recursos', ja: 'リソース' },
+          label: sidebarEn.resources,
+          translations: { es: sidebarEs.resources, ja: sidebarJa.resources },
           items: ['docs/resources/whitepaper', 'docs/resources/media-kit'],
         },
         {
-          label: 'Support',
-          translations: { es: 'Soporte', ja: 'サポート' },
+          label: sidebarEn.support,
+          translations: { es: sidebarEs.support, ja: sidebarJa.support },
           autogenerate: { directory: 'docs/support' },
         },
       ],

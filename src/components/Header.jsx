@@ -20,6 +20,11 @@ import {
 import { useState } from 'react'
 
 import logo from '../assets/xahau-logo.svg'
+import enJson from '../i18n/en.json'
+import esJson from '../i18n/es.json'
+import jaJson from '../i18n/ja.json'
+
+const translations = { en: enJson, es: esJson, ja: jaJson }
 
 const LOCALES = ['es', 'ja']
 
@@ -28,51 +33,6 @@ const languages = [
   { code: 'es', label: 'Español', flag: '🇪🇸' },
   { code: 'ja', label: '日本語', flag: '🇯🇵' },
 ]
-
-const nav = {
-  en: {
-    about: 'About',
-    features: 'Features',
-    ecosystem: 'Ecosystem',
-    roadmap: 'Roadmap',
-    docs: 'Documentation',
-    connect: 'Connect',
-    explorers: 'Explorers',
-    events: 'Events',
-    getstarted: 'Get started',
-    protocol: 'Protocol Reference',
-    infra: 'Infrastructure',
-    discord: 'Community Discord',
-  },
-  es: {
-    about: 'Acerca de',
-    features: 'Características',
-    ecosystem: 'Ecosistema',
-    roadmap: 'Hoja de ruta',
-    docs: 'Documentación',
-    connect: 'Conectar',
-    explorers: 'Exploradores',
-    events: 'Eventos',
-    getstarted: 'Primeros pasos',
-    protocol: 'Referencia de Protocolo',
-    infra: 'Infraestructura',
-    discord: 'Discord de la Comunidad',
-  },
-  ja: {
-    about: 'Xahauについて',
-    features: '機能',
-    ecosystem: 'エコシステム',
-    roadmap: 'ロードマップ',
-    docs: 'ドキュメント',
-    connect: 'コネクト',
-    explorers: 'エクスプローラー',
-    events: 'イベント',
-    getstarted: 'はじめる',
-    protocol: 'プロトコルリファレンス',
-    infra: 'インフラストラクチャ',
-    discord: 'コミュニティDiscord',
-  },
-}
 
 const XahauLogo = ({ href }) => (
   <a href={href} className="-m-1.5 p-1.5">
@@ -88,7 +48,7 @@ export default function Header(props) {
   const firstSegment = pathname.split('/')[1]
   const currentLocale = LOCALES.includes(firstSegment) ? firstSegment : 'en'
   const p = currentLocale !== 'en' ? `/${currentLocale}` : ''
-  const t = nav[currentLocale]
+  const t = translations[currentLocale].header
 
   function langUrl(code) {
     const prefix = currentLocale !== 'en' ? `/${currentLocale}` : ''

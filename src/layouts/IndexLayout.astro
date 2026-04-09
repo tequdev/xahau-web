@@ -1,8 +1,8 @@
 ---
   import '../styles/main.css'
   import worldmap from '../assets/worldmap.svg'
-  import type { IndexLocale } from '../i18n/indexTranslations'
-  import { indexTranslations } from '../i18n/indexTranslations'
+  import type { Locale } from '../i18n/translations'
+  import { t } from '../i18n/translations'
   import BaseLayout from '../layouts/BaseLayout.astro'
 
   const _frontmatter = Astro.props.frontmatter
@@ -11,9 +11,9 @@
   const firstSegment = Astro.url.pathname.split('/')[1]
   const locale = (
     LOCALES.includes(firstSegment) ? firstSegment : 'en'
-  ) as IndexLocale
+  ) as Locale
   const p = locale !== 'en' ? `/${locale}` : ''
-  const i = indexTranslations[locale]
+  const i = t(locale).index
 ---
 <BaseLayout frontmatter={_frontmatter}>
   <div

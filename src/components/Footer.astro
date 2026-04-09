@@ -1,75 +1,14 @@
 ---
   import { Image } from 'astro:assets'
   import logo from '../assets/xahau-logo.svg'
+  import { t as getT } from '../i18n/translations'
 
   const LOCALES = ['es', 'ja']
   const firstSegment = Astro.url.pathname.split('/')[1]
   const locale = LOCALES.includes(firstSegment) ? firstSegment : 'en'
   const p = locale !== 'en' ? `/${locale}` : ''
 
-  const translations = {
-    en: {
-      tagline: 'This website is open source and open for contributions',
-      on: 'on',
-      about: 'About',
-      features: 'Features',
-      ecosystem: 'Ecosystem',
-      roadmap: 'Roadmap',
-      break: 'Break Xahau',
-      fraud: 'Report Fraud',
-      media: 'Media kit',
-      privacy: 'Privacy Policy',
-      docs: 'Documentation',
-      getstarted: 'Get started',
-      protocol: 'Protocol Reference',
-      infra: 'Infrastructure',
-      connect: 'Connect',
-      events: 'Events',
-      discord: 'Community Discord',
-    },
-    es: {
-      tagline:
-        'Este sitio web es de código abierto y está abierto a contribuciones',
-      on: 'en',
-      about: 'Acerca de',
-      features: 'Características',
-      ecosystem: 'Ecosistema',
-      roadmap: 'Hoja de ruta',
-      break: 'Break Xahau',
-      fraud: 'Reportar Fraude',
-      media: 'Kit de Prensa',
-      privacy: 'Política de Privacidad',
-      docs: 'Documentación',
-      getstarted: 'Primeros pasos',
-      protocol: 'Referencia de Protocolo',
-      infra: 'Infraestructura',
-      connect: 'Conectar',
-      events: 'Eventos',
-      discord: 'Discord de la Comunidad',
-    },
-    ja: {
-      tagline:
-        'このウェブサイトはオープンソースで、コントリビューションを受け付けています',
-      on: 'にて',
-      about: 'Xahauについて',
-      features: '機能',
-      ecosystem: 'エコシステム',
-      roadmap: 'ロードマップ',
-      break: 'Break Xahau',
-      fraud: '不正を報告',
-      media: 'メディアキット',
-      privacy: 'プライバシーポリシー',
-      docs: 'ドキュメント',
-      getstarted: 'はじめる',
-      protocol: 'プロトコルリファレンス',
-      infra: 'インフラストラクチャ',
-      connect: 'コネクト',
-      events: 'イベント',
-      discord: 'コミュニティDiscord',
-    },
-  }
-
-  const t = translations[locale]
+  const t = getT(locale as 'en' | 'es' | 'ja').footer
 ---
 <footer
   class="bg-white text-base font-regular text-black **:text-black **:no-underline"
