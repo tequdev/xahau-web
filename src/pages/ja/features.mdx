@@ -2,74 +2,89 @@
 title: 機能
 description: 実証された技術と革新的なアプローチ
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import PageSection from '../../components/PageSection.astro';
+
+import PageLayout from '../layouts/PageLayout.astro';
+import PageSection from '../components/PageSection.astro';
 
 <PageLayout frontmatter={frontmatter} wide="true">
 <PageSection align="left" gem="5" gemSize="large" loading="eager">
 ## Hooks：アカウントレベルのスマートコントラクトロジック
 
-Xahauは**Hooks**を導入しています。これは、**アカウントレベル**で直接動作するユニークな形式のオンレジャースマートコントラクトロジックです。外部のコントラクトアドレスとの対話を必要とする他のブロックチェーンのスマートコントラクトとは異なり、Hooksはユーザーアカウント自体に組み込まれた軽量なプログラムです。これらのHooksは、明示的な関数呼び出しなしに、そのアカウントに関わるあらゆる取引を自動的に検査、変更、または拒否することができます。
+Xahauは**Hooks**を導入しています。これは、**アカウントレベル**で直接動作するユニークな形式のオンレジャースマートコントラクトロジックです。外部のコントラクトアドレスとの対話を必要とする他のブロックチェーンのスマートコントラクトとは異なり、Hooksはユーザーアカウント自体に組み込まれた軽量なプログラムです。これらのHooksは、明示的な関数呼び出しなしに、そのアカウントに関わるあらゆる取引を自動的に検査、変更、または拒否することができます。 Unlike smart contracts on most blockchains that require interacting with external contract addresses, Hooks are lightweight programs embedded inside user accounts themselves. These Hooks can automatically inspect, modify, or reject any transaction involving that account, without the need for explicit function calls.
 
-Hooksはインラインかつコンセンサス内で実行されるため、最小限のオーバーヘッドでリアルタイムのプログラマビリティを提供します。これにより、不正なトークン転送の拒否、入金時のアクションのトリガー、コンプライアンスロジックの実装などの強力なユースケースが可能になります。Hooksは新しいセキュリティとプログラマビリティのパラダイムを表し、アカウントをトランザクションロジックのアクティブな参加者にします。
+Because Hooks are executed inline and within consensus, they offer real-time programmability with minimal overhead. This allows for powerful use cases such as rejecting unauthorized token transfers, triggering actions on deposits, or implementing compliance logic—all without slowing down the network. Hooks represent a new security and programmability paradigm, making accounts active participants in transaction logic.
 
 ## 設計によるトークンと資産の制御
 
-Xahauは発行者とユーザーにトークンとトラストラインに対する詳細な**制御**を与えます。`TrustSet`、`Clawback`、`Freeze`、`Deposit Authorization`などの機能により、トークンの使用方法や受け取り方を完全にカスタマイズできます。資産はホワイトリスト化、ブロック、または燃焼させることができ、すべてプロトコルレベルで適用されます。
+Xahau gives issuers and users granular **control over tokens and trustlines**. Features like `TrustSet`, `Clawback`, `Freeze`, and `Deposit Authorization` allow full customization of how tokens can be used or received. Assets can be whitelisted, blocked, or burned, all enforced at the protocol level.
 
 これにより、Xahauは規制された金融商品、ステーブルコイン、ロイヤルティプログラム、エンタープライズサプライチェーンなど、コンプライアンス、安全性、精度が重要なシナリオに特に適しています。
 </PageSection>
 <PageSection class="bg-xahau-gray text-white" gem="9" align="right">
 ## ガバナンスゲーム：目的を持った分散型調整
 
-Xahauは**ガバナンスゲーム**に裏付けられた新しいガバナンスシステムを特徴としています。これは、修正案を提案、審査、投票するための透明でオンレジャーのメカニズムです。バリデーターオペレーター（ガバナー）は、説明責任とエンゲージメントに基づく構造化された報酬システムで競いながら、プロトコルの形成に直接参加します。
+Xahau features a novel governance system backed by the **Governance Game**, a transparent, on-ledger mechanism for proposing, reviewing, and voting on amendments. Validator operators (Governors) participate directly in shaping the protocol, while also competing in a structured reward system based on accountability and engagement.
 
-このシステムにより、プロトコルのアップグレードとポリシー決定が、中央集権的なエンティティによって指示されるのではなく、オープンで参加型になることが保証されます。構造化されたエンタープライズ調整の利点と、分散型コンセンサスの透明性と回復力を組み合わせています。
+This system ensures that protocol upgrades and policy decisions are open and participatory, not dictated by a centralized entity. It combines the benefits of structured enterprise coordination with the transparency and resilience of decentralized consensus. By gamifying governance in a secure and incentive-aligned way, Xahau sets a new standard for on-chain coordination.
 
 ## 残高報酬：ステーキングなしのパッシブ収益
 
-Xahauは**残高報酬**システムを提供しており、アカウントが資産を保有するだけで価値を受動的に積み立てることができます。これらの報酬はアカウント残高に基づいて計算され、ステーキング、委任、サードパーティのコントラクトを必要とせず、コンセンサスによって適用されるメカニズムを通じて分配されます。
+Xahauは**残高報酬**システムを提供しており、アカウントが資産を保有するだけで価値を受動的に積み立てることができます。これらの報酬はアカウント残高に基づいて計算され、ステーキング、委任、サードパーティのコントラクトを必要とせず、コンセンサスによって適用されるメカニズムを通じて分配されます。 These rewards are calculated based on account balance and distributed through a consensus-enforced mechanism, without requiring staking, delegation, or third-party contracts.
 
-このメカニズムはプロトコルレベルのロジックとオンチェーンHooksによって支えられており、報酬が自動的、公正、持続可能であることを保証します。
+このメカニズムはプロトコルレベルのロジックとオンチェーンHooksによって支えられており、報酬が自動的、公正、持続可能であることを保証します。 Unlike yield farming or staking systems on other blockchains, Xahau’s reward model doesn’t require users to lock assets or chase complex DeFi strategies—it works natively, with transparency and simplicity.
 </PageSection>
 <PageSection align="center">
 ## エスクロー：あらゆる資産の条件付き転送
 
-Xahauはネイティブおよび**発行済みトークン**の**オンレジャーエスクロー**をサポートし、幅広いビジネスおよび金融ユースケースのための安全な条件付き転送を可能にします。資金またはトークンは、ネットワーク自体によって適用される時間ベースまたは条件ベースのリリースロジックでロックできます。
+Xahauはネイティブおよび**発行済みトークン**の**オンレジャーエスクロー**をサポートし、幅広いビジネスおよび金融ユースケースのための安全な条件付き転送を可能にします。資金またはトークンは、ネットワーク自体によって適用される時間ベースまたは条件ベースのリリースロジックでロックできます。 Funds or tokens can be locked with time-based or condition-based release logic, enforced by the network itself.
+
+Whether you’re building a milestone-based payment system, marketplace settlement, or trusted token distribution, Xahau’s escrows offer a simple yet powerful tool—without the need for external smart contracts. Native support for both fungible and non-fungible assets in escrow makes this a uniquely versatile feature.
 
 ## Remit：ネイティブのクロスアカウント転送
 
-**Remit**機能により、アカウント間での合理化されたマルチオペレーション取引が可能になり、複雑または大量の支払いフローに最適です。複数の個別の命令を送信する代わりに、単一のRemit取引が複数の受取人に価値を配布したり、複数の残高変更をアトミックにトリガーしたりできます。
+**Remit**機能により、アカウント間での合理化されたマルチオペレーション取引が可能になり、複雑または大量の支払いフローに最適です。複数の個別の命令を送信する代わりに、単一のRemit取引が複数の受取人に価値を配布したり、複数の残高変更をアトミックにトリガーしたりできます。 Instead of sending multiple separate instructions, a single Remit transaction can distribute value to multiple recipients or trigger multiple balance changes atomically.
+
+This improves efficiency and reliability, especially for payment processors, marketplaces, or applications that need to perform bundled operations. Because it’s built into the protocol, Remit ensures predictable performance, low latency, and strong auditability.
 </PageSection>
 <PageSection class="bg-xahau-gray text-white" gem="4" align="right">
 ## 手数料燃焼による低手数料
 
-Xahauは一貫して**低い取引手数料**を維持し、スパムを減らしてネットワークの長期的な健全性を報酬する組み込みの**手数料燃焼**モデルを持っています。各取引はXAHで最小限の手数料を支払い、その手数料の一部は永久に破壊されます。
+Xahauは一貫して**低い取引手数料**を維持し、スパムを減らしてネットワークの長期的な健全性を報酬する組み込みの**手数料燃焼**モデルを持っています。各取引はXAHで最小限の手数料を支払い、その手数料の一部は永久に破壊されます。 Every transaction pays a minimal fee in XAH, and a portion of that fee is permanently destroyed—creating a deflationary effect over time.
+
+This approach discourages network abuse while preserving accessibility, particularly for high-throughput or cost-sensitive applications. Unlike inflationary models or auction-style fees, Xahau provides predictability and economic alignment for all users.
 
 ## 高速、グリーン、スケーラブル
 
-XRPLのコンセンサスプロトコルの洗練されたバージョンの上に構築されたXahauは、**高速なファイナリティ**、低エネルギー使用量、信頼性の高いスケーラビリティを提供します。取引は数秒で確認され、マイニングなし、最小限のハードウェア要件で行われます。
+XRPLのコンセンサスプロトコルの洗練されたバージョンの上に構築されたXahauは、**高速なファイナリティ**、低エネルギー使用量、信頼性の高いスケーラビリティを提供します。取引は数秒で確認され、マイニングなし、最小限のハードウェア要件で行われます。 Transactions confirm in seconds, with no mining and minimal hardware requirements. The result is a network that can serve real-world financial and enterprise use cases without compromising the environment or user experience.
+
+Xahau’s architecture is ideal for global payment systems, tokenized asset platforms, or high-volume applications where performance and sustainability are non-negotiable.
 </PageSection>
 <PageSection align="left" gem="13">
 ## URITokens：XahauのネイティブNFT
 
-**URITokens**は、別のスマートコントラクトを介してではなく、レジャーのネイティブな部分として実装されたXahauの非代替トークン（NFT）へのアプローチを表しています。URITokenは、発行アカウントとトークンのメタデータやコンテンツを通常指すUniform Resource Identifier（URI）によって一意に識別される、ファーストクラスのオンレジャーオブジェクトです。
+**URITokens**は、別のスマートコントラクトを介してではなく、レジャーのネイティブな部分として実装されたXahauの非代替トークン（NFT）へのアプローチを表しています。URITokenは、発行アカウントとトークンのメタデータやコンテンツを通常指すUniform Resource Identifier（URI）によって一意に識別される、ファーストクラスのオンレジャーオブジェクトです。 A URIToken is a first-class on-ledger object uniquely identified by the issuing account and a Uniform Resource Identifier (URI) that typically points to the token’s metadata or content. Only one URIToken with a given URI can exist per account, ensuring true uniqueness for each digital asset.
 
-この組み込みNFT標準により、クリエイターはカスタムコードをデプロイすることなく、シンプルな取引（例：URITokenMint、URITokenBuy、URITokenBurn）でNFTをミント、取引、または燃焼させることができます。
+この組み込みNFT標準により、クリエイターはカスタムコードをデプロイすることなく、シンプルな取引（例：URITokenMint、URITokenBuy、URITokenBurn）でNFTをミント、取引、または燃焼させることができます。 The issuer of a URIToken can even allow it to be destroyed (burned) by setting a flag, giving flexibility in how NFTs are managed. By integrating NFTs at the protocol level, Xahau makes issuing and managing digital collectibles or credentials more efficient and secure.
 
 ## オファー：内蔵の分散型取引所（DEX）
 
-Xahauはネイティブの**オファー**システムを含み、レジャー上の内蔵分散型取引所を動かしています。ユーザーはネットワーク上で直接資産（トークンや発行通貨など）を売買するための**オファー**エントリを作成でき、これらのオファーはプロトコルのオーダーブックによって自動的にマッチングされます。
+Xahau includes a native **Offers** system, powering a built-in decentralized exchange on the ledger. Users can create **Offer** entries to buy or sell assets (such as tokens or issued currencies) directly on the network, and these offers are automatically matched by the protocol’s order book.
+
+This feature, inherited from XRPL’s DEX, enables a dynamic and responsive trading environment where exchange of value happens peer-to-peer without intermediary exchanges. The ability to place and cancel trade orders is provided by dedicated transactions (OfferCreate and OfferCancel). Unlike many blockchains that require smart contracts or external platforms for trading, Xahau’s DEX is a first-class feature of the ledger. This on-ledger exchange offers fast settlement and low fees, making asset trading seamless for users and applications.
 </PageSection>
 <PageSection class="bg-xahau-gray text-white" gem="2" align="right">
 ## チェック：繰延決済システム
 
-Xahauはブロックチェーン上でデジタル小切手を書くような繰延決済システムである**チェック**をサポートしています。一方が後で現金化するか、必要に応じてキャンセルできるチェック（支払いの約束）を発行できます。
+Xahauはブロックチェーン上でデジタル小切手を書くような繰延決済システムである**チェック**をサポートしています。一方が後で現金化するか、必要に応じてキャンセルできるチェック（支払いの約束）を発行できます。 One party can issue a Check (promise of payment) that the intended recipient may cash at a later time or cancel if needed. This feature allows secure, flexible transactions – for example, a business can issue payment that the receiver will claim when certain conditions are met.
+
+The ledger has dedicated transactions for creating a check, cashing it, or canceling it. Few other platforms have this kind of native deferred payment instrument; Xahau’s check system provides an extra layer of payment control, all enforced by the network’s rules without requiring custom smart contracts.
 
 ## 支払い：マルチアセット転送とチャンネル
 
-Xahauの**支払い**機能は、ネットワーク全体での価値の高速かつ柔軟な転送を容易にするように設計されています。Xahauはトラストラインと発行通貨のシステムを通じて*マルチアセット支払い*をサポートし、スマートコントラクトを必要とせずに複数の通貨やトークンの組み込みサポートを可能にします。
+Xahauの**支払い**機能は、ネットワーク全体での価値の高速かつ柔軟な転送を容易にするように設計されています。Xahauはトラストラインと発行通貨のシステムを通じて*マルチアセット支払い*をサポートし、スマートコントラクトを必要とせずに複数の通貨やトークンの組み込みサポートを可能にします。 Uniquely, Xahau (like XRPL) supports *multi-asset payments* through a system of trust lines and issued currencies. Using a `TrustSet` transaction, two parties can establish a trust line to transact in a custom asset or IOU, enabling built-in support for multiple currencies or tokens without requiring smart contracts.
 
-Xahauはまた、スケーラビリティのための**ペイメントチャンネル**をサポートしています。ペイメントチャンネルにより、2者がオフレジャーで高速・大量の取引を行い、その後正味の結果をブロックチェーン上で決済することができます。
+This means businesses can issue stablecoins or tokens on Xahau and users can send or exchange them natively. The Payments suite also includes advanced features like **Deposit Preauthorization**, which lets an account whitelist who can send it funds, adding security against unwanted transactions.
+
+Xahauはまた、スケーラビリティのための**ペイメントチャンネル**をサポートしています。ペイメントチャンネルにより、2者がオフレジャーで高速・大量の取引を行い、その後正味の結果をブロックチェーン上で決済することができます。 Payment channels allow two parties to conduct rapid, high-volume transactions off-ledger and then settle the net result on the blockchain. With transactions like PaymentChannelCreate, Fund, and Claim, Xahau enables micropayments or streaming payments that are secured by the ledger but don’t congest it.
 </PageSection>
 </PageLayout>
