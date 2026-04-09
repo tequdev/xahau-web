@@ -1,7 +1,8 @@
 ---
 title: Amendments
 ---
-[\[Source\]](https://github.com/ripple/rippled/blob/master/src/ripple/protocol/impl/LedgerFormats.cpp#L138-L144)
+
+[[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/protocol/impl/LedgerFormats.cpp#L138-L144)
 
 El tipo de objeto `Amendments` contiene una lista de Enmiendas que están actualmente activas. Cada versión del ledger contiene **como máximo un** objeto `Amendments`.
 
@@ -31,23 +32,23 @@ El tipo de objeto `Amendments` contiene una lista de Enmiendas que están actual
 
 ### Campos
 
-| Nombre            | Tipo JSON | \[Tipo Interno]\[] | ¿Requerido? | Descripción                                                                                                                                                                 |
-| ----------------- | --------- | ------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Amendments`      | Array     | Vector256           | No          | Arreglo de IDs de enmienda de 256 bits para todas las enmiendas actualmente habilitadas. Si se omite, no hay enmiendas habilitadas.                                          |
-| `Flags`           | Number    | UInt32              | Sí          | Un mapa de bits de indicadores booleanos habilitados para este objeto. Actualmente, el protocolo no define indicadores para objetos `Amendments`. El valor es siempre `0`.    |
-| `LedgerEntryType` | String    | UInt16              | Sí          | El valor `0x0066`, mapeado a la cadena `Amendments`, indica que este objeto describe el estado de las enmiendas a Xahau.                                                     |
-| `Majorities`      | Array     | STArray             | No          | Arreglo de objetos que describen el estado de las enmiendas que tienen apoyo de mayoría pero aún no están habilitadas. Si se omite, no hay enmiendas pendientes con apoyo de mayoría. |
+| Nombre            | Tipo JSON | [Tipo Interno][] | Required? | Descripción                                                                                                                                                                           |
+| ----------------- | --------- | ---------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Amendments`      | Array     | Vector256        | No        | Arreglo de IDs de enmienda de 256 bits para todas las enmiendas actualmente habilitadas. Si se omite, no hay enmiendas habilitadas.                                                   |
+| `Flags`           | Number    | UInt32           | Sí        | Un mapa de bits de indicadores booleanos habilitados para este objeto. Actualmente, el protocolo no define indicadores para objetos `Amendments`. El valor es siempre `0`.            |
+| `LedgerEntryType` | String    | UInt16           | Sí        | El valor `0x0066`, mapeado a la cadena `Amendments`, indica que este objeto describe el estado de las enmiendas a Xahau.                                                              |
+| `Majorities`      | Array     | STArray          | No        | Arreglo de objetos que describen el estado de las enmiendas que tienen apoyo de mayoría pero aún no están habilitadas. Si se omite, no hay enmiendas pendientes con apoyo de mayoría. |
 
 Cada miembro del campo `Majorities`, si está presente, es un objeto con un campo, `Majority`, cuyo contenido es un objeto anidado con los siguientes campos:
 
-| Nombre      | Tipo JSON | \[Tipo Interno]\[] | Descripción                                                                                        |
-| ----------- | --------- | ------------------- | -------------------------------------------------------------------------------------------------- |
-| `Amendment` | String    | Hash256             | El ID de Enmienda de la enmienda pendiente.                                                        |
-| `CloseTime` | Number    | UInt32              | El campo `close_time` de la versión del ledger donde esta enmienda obtuvo una mayoría más recientemente. |
+| Nombre      | Tipo JSON | [Tipo Interno][] | Descripción                                                                                              |
+| ----------- | --------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
+| `Amendment` | String    | Hash256          | El ID de Enmienda de la enmienda pendiente.                                                              |
+| `CloseTime` | Number    | UInt32           | El campo `close_time` de la versión del ledger donde esta enmienda obtuvo una mayoría más recientemente. |
 
-En el proceso de enmiendas, un consenso de validadores agrega una nueva enmienda al campo `Majorities` usando una pseudo-transacción \[EnableAmendment]\[] con el indicador `tfGotMajority` cuando el 80% o más de los validadores la apoyan. Si el apoyo para una enmienda pendiente cae por debajo del 80%, una pseudo-transacción \[EnableAmendment]\[] con el indicador `tfLostMajority` elimina la enmienda del arreglo `Majorities`. Si una enmienda permanece en el campo `Majorities` durante al menos 2 semanas, una pseudo-transacción \[EnableAmendment]\[] sin indicadores la elimina de `Majorities` y la agrega permanentemente al campo `Amendments`.
+En el proceso de enmiendas, un consenso de validadores agrega una nueva enmienda al campo `Majorities` usando una pseudo-transacción [EnableAmendment][] con el indicador `tfGotMajority` cuando el 80% o más de los validadores la apoyan. Si el apoyo para una enmienda pendiente cae por debajo del 80%, una pseudo-transacción [EnableAmendment][] con el indicador `tfLostMajority` elimina la enmienda del arreglo `Majorities`. Si una enmienda permanece en el campo `Majorities` durante al menos 2 semanas, una pseudo-transacción [EnableAmendment][] sin indicadores la elimina de `Majorities` y la agrega permanentemente al campo `Amendments`.
 
-**Nota:** Técnicamente, todas las transacciones en un ledger se procesan basándose en qué enmiendas están habilitadas en la versión del ledger inmediatamente anterior. Mientras se aplican transacciones a una versión del ledger donde una enmienda se habilita, las reglas no cambian a mitad del ledger.
+**Nota:** Técnicamente, todas las transacciones en un ledger se procesan basándose en qué enmiendas están habilitadas en la versión del ledger inmediatamente anterior. Mientras se aplican transacciones a una versión del ledger donde una enmienda se habilita, las reglas no cambian a mitad del ledger. After the ledger is closed, the next ledger uses the new rules as defined by any new amendments that apply.
 
 ### Formato del ID Amendments
 
