@@ -2,6 +2,7 @@
 title: ledger_last_time
 description: Obtener la marca de tiempo del último ledger cerrado
 ---
+
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### Comportamiento
@@ -20,7 +21,8 @@ La marca de tiempo Unix equivalente es: `ledger_last_time() + 946684800;`
 <TabItem label="C">
 ```c
 int64_t ledger_last_time();
-````
+```
+
 
 </TabItem>
 
@@ -39,6 +41,8 @@ function ledger_last_time(): ErrorCode | number
 int64_t ts =
     ledger_last_time();
 ```
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -56,14 +60,18 @@ Esta API no recibe parámetros.
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                                           |
-| -------- | ----------------------------------------------------- |
-| int64_t  | La marca de tiempo XRPL del último ledger cerrado     |
+| Tipo    | Descripción                                       |
+| ------- | ------------------------------------------------- |
+| int64_t | La marca de tiempo XRPL del último ledger cerrado |
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo   | Descripción                                                                                          |
-| ------ | ---------------------------------------------------------------------------------------------------- |
+
+
+| Tipo   | Descripción                                                                                                     |
+| ------ | --------------------------------------------------------------------------------------------------------------- |
 | number | Devuelve un código de error si ocurre un fallo, o un número que representa la marca de tiempo del último ledger |
 </TabItem>
 </Tabs>
