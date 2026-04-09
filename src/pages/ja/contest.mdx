@@ -2,22 +2,24 @@
 title: Xahau Dev Contest
 description: Ecosystem Rising - Xahauを活用したユーザー向けサービスを構築
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import PageSection from '../../components/PageSection.astro';
+
+import PageLayout from '../layouts/PageLayout.astro';
+import PageSection from '../components/PageSection.astro';
 
 <PageLayout frontmatter={frontmatter} wide="true">
 <PageSection align="left" gem="5" gemSize="large" loading="eager">
-## はじめに
+## Introduction
 
 **Xahau Dev Contest: Ecosystem Rising**へようこそ！
 このコンテストは、**Xahauを活用したユーザー向けサービス**を構築するイノベーターを招待し、賞品を競いながらXahauエコシステムを強化するものです。
+This contest invites innovators to build **user-facing services powered by Xahau** and compete for prizes while strengthening the Xahau ecosystem.
 
 ## 賞品
 
 * **XAHの主要賞3つ**（受賞プロジェクト向け）
-    * **🥇 1位** XAH建て4,000 USD相当
-    * **🥈 2位** XAH建て2,000 USD相当
-    * **🥉 3位** XAH建て1,000 USD相当
+  * **🥇 1位** XAH建て4,000 USD相当
+  * **🥈 2位** XAH建て2,000 USD相当
+  * **🥉 3位** XAH建て1,000 USD相当
 
 ## スケジュール
 
@@ -81,6 +83,22 @@ import PageSection from '../../components/PageSection.astro';
   <div>• 各提出には他の人がプロジェクトを理解するための<strong>基本的なドキュメント</strong>を含める必要があります。</div>
   <div>• <strong>AIツール</strong>は開発とドキュメントの両方に使用できます。</div>
   <div>• プロジェクトが<strong>Hooks</strong>を使用する場合、Hookコードはオープンソースである必要があります。</div>
+  <div>• Each project may be submitted by an individual or a group of participants.</div>
+  <div>• Different projects from the same participant(s) can be eligible for different prizes.</div>
+  <div>• Projects <strong>must run on the Xahau Mainnet</strong>.</div>
+  <div>
+    <div>• Each project <strong>must be accessible online</strong>, so that both judges and the public can use or view it.</div>
+    <div class="ml-6 mt-1">◦ This avoids the need for judges to install or configure projects locally, and reduces the risk of unexpected errors or participant assistance being required.</div>
+  </div>
+  <div>
+    <div>• Each submission must include <strong>basic documentation</strong> to help others understand the project.</div>
+    <div class="ml-6 mt-1">◦ Optionally, you can also include <strong>multimedia material</strong> (videos, slides, demos, etc.) to better explain your work.</div>
+  </div>
+  <div>• <strong>AI tools</strong> may be used both for development and documentation.</div>
+  <div>• If your project uses <strong>Hooks</strong>, the Hook code must be open source, so that it can be audited for safety and serve as a learning resource for the community. You must attach their C code in your submission along with the hook hash. Check the "Submission Format" section.</div>
+  <div>• Projects that clearly offer regulated financial services or that target illegal activities are not eligible.</div>
+  <div>• To be evaluated by the judges, you must include your submission with a PR as indicated in the "Submission Format" section.</div>
+  <div>• Once your submission PR has been created, post a tweet on X about your project, tagging <a href="https://x.com/XahauNetwork" target="_blank" rel="noopener noreferrer">@XahauNetwork</a>, to announce that you've participated in the Xahau Dev Contest.</div>
 </div>
 </PageSection>
 <PageSection class="bg-xahau-gray text-white" align="right" gem="13">
@@ -89,17 +107,22 @@ import PageSection from '../../components/PageSection.astro';
 提出物をレビューする際、審査員は特に以下を重視します：
 
 <div class="space-y-2">
+  <div>• <strong>Originality and creativity</strong> of the idea.</div>
   <div>• アイデアの<strong>独自性と創造性</strong></div>
   <div>• コンテスト前にXahauメインネットで同じサービスを提供する<strong>既存の競合他社の不在</strong></div>
   <div>• エンドユーザーへの<strong>影響と有用性</strong></div>
   <div>• <strong>実行の品質</strong>（安定性、ドキュメント、ユーザーエクスペリエンス）</div>
   <div>• <strong>Hooksの使用（Xahauのスマートコントラクト）</strong></div>
+  <div>• <strong>Impact and usefulness</strong> for end users (individuals, businesses, or public sector).</div>
+  <div>• <strong>Quality of execution</strong> (stability, documentation, user experience).</div>
+  <div>• <strong>Use of Hooks (Smart Contracts on Xahau)</strong>.</div>
 </div>
 </PageSection>
 <PageSection align="left" gem="2">
 ## 提出フォーマット
 
-各プロジェクトは**[このリポジトリ](https://github.com/xahau/xahau-2nd-dev-contest)**のsubmissionsディレクトリ内にフォルダと少なくとも1つの**提出ファイル**を含める必要があります。
+各プロジェクトは\*\*[このリポジトリ](https://github.com/xahau/xahau-2nd-dev-contest)**のsubmissionsディレクトリ内にフォルダと少なくとも1つの**提出ファイル\*\*を含める必要があります。
+The file and directory must be named with your GitHub username followed by the project name, separated by an underscore, and using the .md extension for the file.
 
 例：submissions/GitHubName_ProjectName/GitHubName_ProjectName.md
 
@@ -119,14 +142,18 @@ import PageSection from '../../components/PageSection.astro';
   <div>• <strong>プロジェクトのリポジトリへのリンク</strong>（任意）</div>
   <div>• <strong>その他のリンク</strong>（任意）</div>
 </div>
+
+A template directory and file are available in the repository folder, which participants can use to fill in their project details.
 </PageSection>
 <PageSection class="bg-xahau-gray text-white" align="right" gem="11">
 ## サポートとコミュニティ
 
 質問や指導が必要な場合：
 
-* **[Xahau Builders Discord](https://discord.gg/ds7nb93mYj)**に参加してください。
-* または**[contests@xahau.org](mailto:contests@xahau.org)**にメールしてください。
+* \*\*[Xahau Builders Discord](https://discord.gg/ds7nb93mYj)\*\*に参加してください。
+* または\*\*[contests@xahau.org](mailto:contests@xahau.org)\*\*にメールしてください。
+
+We will try to answer as soon as possible. Your questions may also be added to the FAQ in this README so that others can benefit from the answers.
 
 ## 所有権
 
@@ -134,32 +161,62 @@ import PageSection from '../../components/PageSection.astro';
 
 ## 便利なリンク
 
+Here are some useful resources for Xahau developers:
+
 * [Xahauドキュメント](https://docs.xahau.network)
 * [Xahau Hooksドキュメント](https://xahau.network/docs/hooks/)
 * [XahauのGitHubリポジトリ](https://github.com/Xahau)
 * [Xaman Webサイト](https://xaman.app)
 * [Xahau Testnetフォーセット](https://xahau-test.net/)
 * [Xahau Discord](https://discord.gg/ds7nb93mYj)
+
+## Recap: What You Need to Do
+
+<div class="space-y-2">
+  <div>• Get inspired. Be creative and motivated to build something that strengthens the Xahau ecosystem.</div>
+  <div>• Build your project. Develop your web-based service using the Xahau Mainnet.</div>
+  <div>• Submit your work, Create a PR (Pull Request) following the instructions in the "Submission Format" section.</div>
+  <div>• Announce your participation. Post a tweet on X about your project, tagging <a href="https://x.com/XahauNetwork" target="_blank" rel="noopener noreferrer">@XahauNetwork</a>, and share that you've joined the <strong>Xahau Dev Contest</strong>.</div>
+</div>
 </PageSection>
 <PageSection align="left" gem="6">
 ## FAQ
 
 **Q: 複数のプロジェクトを提出できますか？**
-- A: はい！個人でもグループの一部としても、好きなだけ提出できます。
+* A: Yes! You can submit as many as you want, individually or as part of a group.
 
 **Q: プロジェクトはオープンソースである必要がありますか？**
-- A: いいえ、ただし審査員がどのように機能するかを理解できるように、少なくとも基本的なドキュメントを含める必要があります。
+* A: いいえ、ただし審査員がどのように機能するかを理解できるように、少なくとも基本的なドキュメントを含める必要があります。 If your project includes Hooks, you must attach their C code in your submission along with the hook hash. Check the "Submission Format" section.
 
 **Q: AIを使用してプロジェクトを構築または文書化できますか？**
-- A: はい、AIの使用は完全に許可されています。
+* A: はい、AIの使用は完全に許可されています。
 
 **Q: どのようなサービスを期待していますか？**
-- A: 個人、企業、または公共部門のいずれかの**エンドユーザーに価値を提供する**あらゆるサービス。
+* A: 個人、企業、または公共部門のいずれかの**エンドユーザーに価値を提供する**あらゆるサービス。 From NFT marketplaces and financial dashboards to voting systems, payment apps, donation hubs, or any innovative public/private service.
 
 **Q: Hooksを使用することに利点はありますか？**
-- A: はい、**Hooks（Xahauのスマートコントラクト）**を創造的に実装したプロジェクトは特別な評価を受けます。
+* A: はい、\*\*Hooks（Xahauのスマートコントラクト）\*\*を創造的に実装したプロジェクトは特別な評価を受けます。
+
+**Q: What happens to my project after the contest?**
+* A: You keep full ownership.
 
 **Q: どこで質問できますか？**
-- A: **[XahauコミュニティDiscord](https://discord.gg/ds7nb93mYj)**または**[contests@xahau.org](mailto:contests@xahau.org)**にメールしてください。
+* A: \*\*[XahauコミュニティDiscord](https://discord.gg/ds7nb93mYj)**または**[contests@xahau.org](mailto:contests@xahau.org)\*\*にメールしてください。
+</PageSection>
+<PageSection class="bg-xahau-gray text-white" align="right" gem="7">
+## Final Disclaimer
+
+By participating, you agree to the following:
+
+<div class="space-y-2">
+  <div>• Participants must meet eligibility criteria and adhere to all rules. It is not allowed to submit projects that have already been published before the competition.</div>
+  <div>• Projects remain the property of their creators, but organizers reserve the right to showcase, share, or feature submissions with appropriate credit.</div>
+  <div>• The organizers retain the right to disqualify submissions that violate rules or compromise the contest's integrity. All jury decisions are final and not subject to appeal.</div>
+  <div>• Organizers are not liable for damages, expenses or losses during participation. The organizers also reserve the right to modify the contest requirements at any time if necessary.</div>
+  <div>• You acknowledge that sanctions and certain jurisdictional restrictions may apply. Eligibility to receive rewards may require compliance with applicable laws, including the completion of KYC (Know Your Customer) verification.</div>
+  <div>• All taxes, fees, or other financial obligations related to rewards are the sole responsibility of the participants.</div>
+  <div>• If you have any concerns or doubts regarding eligibility, requirements, or tax obligations, please reach out to us through the provided communication channels before submitting your entry.</div>
+  <div>Now it's your turn: **Build, submit, and showcase your innovation with Xahau blockchain!**</div>
+</div>
 </PageSection>
 </PageLayout>
