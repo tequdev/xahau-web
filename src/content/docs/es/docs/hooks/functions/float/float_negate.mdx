@@ -2,6 +2,7 @@
 title: float_negate
 description: Niega un número de punto flotante XFL
 ---
+
 import { Tabs, TabItem, LinkButton, Aside } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -30,7 +31,8 @@ import { Tabs, TabItem, LinkButton, Aside } from '@astrojs/starlight/components'
 int64_t float_negate (
     int64_t float1
 );
-````
+```
+
 
 </TabItem>
 
@@ -67,15 +69,19 @@ const negative_one =
 
 <Tabs>
 <TabItem label="C">
-| Nombre | Tipo     | Descripción                             |
-| ------ | -------- | --------------------------------------- |
-| float1 | int64_t  | Número de punto flotante XFL            |
+| Nombre | Tipo    | Descripción                  |
+| ------ | ------- | ---------------------------- |
+| float1 | int64_t | Número de punto flotante XFL |
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
-| Nombre | Tipo   | Descripción              |
-| ------ | ------ | ------------------------ |
-| f1     | bigint | El número a negar        |
+
+
+| Nombre | Tipo   | Descripción          |
+| ------ | ------ | -------------------- |
+| f1     | bigint | The float to negate. |
 </TabItem>
 </Tabs>
 
@@ -83,14 +89,16 @@ const negative_one =
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                                                                                                                                                                   |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| int64_t  | <p>El número XFL (xls17) resultante<br /><br />Si es negativo, error:<br /><code>INVALID_FLOAT</code><br />- alguno de los parámetros no es un número XFL válido</p> |
+| Tipo    | Descripción                                                                                                                                                          |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| int64_t | <p>El número XFL (xls17) resultante<br /><br />Si es negativo, error:<br /><code>INVALID_FLOAT</code><br />- alguno de los parámetros no es un número XFL válido</p> |
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo                | Descripción                                          |
-| ------------------- | ---------------------------------------------------- |
-| ErrorCode o bigint  | Devuelve un código de error o el número XFL resultante |
+| Tipo               | Descripción                                            |
+| ------------------ | ------------------------------------------------------ |
+| ErrorCode o bigint | Devuelve un código de error o el número XFL resultante |
 </TabItem>
 </Tabs>
