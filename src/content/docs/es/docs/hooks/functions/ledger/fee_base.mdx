@@ -2,6 +2,7 @@
 title: fee_base
 description: Obtener la tarifa base del ledger actual
 ---
+
 import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -18,8 +19,7 @@ import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 <TabItem label="C">
 ```c
 int64_t fee_base();
-````
-
+```
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -54,14 +54,16 @@ Esta API no recibe parámetros.
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                              |
-| -------- | ---------------------------------------- |
-| int64_t  | La tarifa base del ledger actual         |
+| Tipo    | Descripción                      |
+| ------- | -------------------------------- |
+| int64_t | La tarifa base del ledger actual |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo   | Descripción                              |
-| ------ | ---------------------------------------- |
-| number | La tarifa base del ledger actual         |
+
+
+| Tipo   | Descripción                      |
+| ------ | -------------------------------- |
+| number | La tarifa base del ledger actual |
 </TabItem>
 </Tabs>
