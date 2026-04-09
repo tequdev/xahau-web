@@ -2,6 +2,7 @@
 title: etxn_burden
 description: Obtiene la carga (burden) de una transacción hipotéticamente emitida
 ---
+
 import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -20,8 +21,7 @@ import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 int64_t etxn_burden (
     void
 );
-````
-
+```
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -38,6 +38,8 @@ function etxn_burden(): ErrorCode | number
 ```c
 int64_t burden = etxn_burden();
 ```
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
