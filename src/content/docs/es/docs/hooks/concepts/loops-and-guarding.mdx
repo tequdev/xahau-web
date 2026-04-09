@@ -2,15 +2,16 @@
 title: Bucles y Guards
 description: Los guards son necesarios para realizar bucles en un Hook.
 ---
+
 import { Aside } from '@astrojs/starlight/components';
 
 ### ¿Qué son los guards?
 
-Los Hooks no son deliberadamente [Turing completos](https://en.wikipedia.org/wiki/Turing_completeness). Esto significa que los bucles arbitrarios no están permitidos. En su lugar, debes _proteger_ tus bucles con un límite máximo de iteraciones.
+Los Hooks no son deliberadamente [Turing completos](https://en.wikipedia.org/wiki/Turing_completeness). Esto significa que los bucles arbitrarios no están permitidos. En su lugar, debes *proteger* tus bucles con un límite máximo de iteraciones.
 
-Un guard es una marca que se coloca en tu código al inicio de cada bucle. Esta marca informa a Xahau cuál será el límite superior de iteraciones _en cualquier escenario posible_. Así, si tu bucle normalmente se ejecuta dos veces pero en ocasiones puede ejecutarse _500_ veces, entonces tu guard deberá indicar 500.
+Un guard es una marca que se coloca en tu código al inicio de cada bucle. Esta marca informa a Xahau cuál será el límite superior de iteraciones *en cualquier escenario posible*. Así, si tu bucle normalmente se ejecuta dos veces pero en ocasiones puede ejecutarse *500* veces, entonces tu guard deberá indicar 500.
 
-Los guards se utilizan para que Xahau determine el _tiempo de ejecución en el peor caso_ (en número de instrucciones) de tu Hook antes de ejecutarlo. Esto sirve de base para calcular la comisión que se cobra por la ejecución del Hook y hace que los tiempos de ejecución sean predecibles y controlables.
+Los guards se utilizan para que Xahau determine el *tiempo de ejecución en el peor caso* (en número de instrucciones) de tu Hook antes de ejecutarlo. Esto sirve de base para calcular la comisión que se cobra por la ejecución del Hook y hace que los tiempos de ejecución sean predecibles y controlables.
 
 <Aside type="tip">
   Los desarrolladores que provienen de otras plataformas de smart contracts pueden encontrar los guards molestos al principio, pero una vez te acostumbras, no son más difíciles de usar que un bucle for normal.
@@ -22,7 +23,7 @@ La función guard indica al ledger el **número máximo de iteraciones** que ten
 
 ```c
 int32_t _g (uint32_t id, uint32_t maxiter);
-````
+```
 
 El primer argumento `id` es el identificador del guard. Es una constante única elegida por el desarrollador, normalmente se usa el número de línea del archivo fuente.
 
@@ -62,7 +63,7 @@ A continuación se muestra la salida en WebAssembly al compilar el ejemplo anter
         ...
 ```
 
-### Bucles anidados
+### Nested Loops
 
 Cuando se utilizan bucles anidados, el argumento `maxiter` debe reflejar el número total de veces que el guard será ejecutado. Esto significa que debes multiplicar los bucles entre sí.
 
