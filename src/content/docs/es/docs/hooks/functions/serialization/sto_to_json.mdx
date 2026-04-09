@@ -2,6 +2,7 @@
 title: sto_to_json
 description: Formatear un objeto STO (datos del ledger codificados en binario) a formato JSON.
 ---
+
 import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -12,7 +13,7 @@ import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 
 <Tabs>
 <TabItem label="JavaScript">
-* Formatea un objeto STO (datos del ledger codificados en binario) a formato JSON.  
+* Formatea un objeto STO (datos del ledger codificados en binario) a formato JSON.
 
   Esta función toma una transacción serializada `blob` y la convierte en un formato JSON legible por humanos.
 * Devuelve la representación JSON decodificada del objeto STO, o un código de error si la conversión falla.
@@ -27,8 +28,7 @@ import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 function sto_to_json(
     blob: ByteArray | HexString
   ): ErrorCode | Record<string, any> | Transaction
-````
-
+```
 </TabItem>
 </Tabs>
 
@@ -47,10 +47,10 @@ const jsonSto = sto_to_json(stoBlob)
 <Tabs>
 <TabItem label="JavaScript">
 
-| Nombre | Tipo                  | Descripción                                                    |
-| ------ | --------------------- | -------------------------------------------------------------- |
-| blob   | ByteArray | HexString | El blob (por ejemplo, una transacción serializada) a convertir |
 
+| Nombre | Tipo      | Descripción                                                    |
+| ------ | --------- | -------------------------------------------------------------- |
+| blob   | ByteArray | El blob (por ejemplo, una transacción serializada) a convertir |
 </TabItem>
 </Tabs>
 
@@ -59,9 +59,9 @@ const jsonSto = sto_to_json(stoBlob)
 <Tabs>
 <TabItem label="JavaScript">
 
-| Tipo                                          | Descripción                                                                                  |
-| --------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| ErrorCode | Record&lt;string, any&gt; | Transaction | Representación JSON decodificada del objeto STO, o un código de error si la conversión falla |
 
+| Tipo                                            | Descripción                                                                                  |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| ErrorCode \| Record<string, any> \| Transaction | Representación JSON decodificada del objeto STO, o un código de error si la conversión falla |
 </TabItem>
 </Tabs>
