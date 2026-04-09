@@ -2,6 +2,7 @@
 title: trace
 description: Escribir el contenido de un buffer en el registro de trazas de Xahaud
 ---
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### Comportamiento
@@ -20,7 +21,8 @@ int64_t trace (
     uint32_t dread_len,
     uint32_t as_hex
 );
-````
+```
+
 
 </TabItem>
 
@@ -56,21 +58,21 @@ trace("Contenido del buffer", some_buffer, 1);
 
 <Tabs>
 <TabItem label="C">
-| Nombre     | Tipo     | Descripción                                                                                              |
-| ---------- | -------- | -------------------------------------------------------------------------------------------------------- |
-| mread_ptr  | uint32_t | Puntero a un mensaje a mostrar antes del buffer. <em>Puede ser null.</em>                                 |
-| mread_len  | uint32_t | Longitud del mensaje. <em>Puede ser null.</em>                                                            |
-| dread_ptr  | uint32_t | Puntero al buffer a mostrar                                                                              |
-| dread_len  | uint32_t | Longitud del buffer                                                                                      |
-| as_hex     | uint32_t | <p>Si es <code>1</code> muestra el buffer en hexadecimal.<br />Si es <code>0</code> lo muestra en UTF-8.</p> |
+| Nombre    | Tipo     | Descripción                                                                                                  |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| mread_ptr | uint32_t | Puntero a un mensaje a mostrar antes del buffer. <em>Puede ser null.</em>                                    |
+| mread_len | uint32_t | Longitud del mensaje. <em>Puede ser null.</em>                                                               |
+| dread_ptr | uint32_t | Puntero al buffer a mostrar                                                                                  |
+| dread_len | uint32_t | Longitud del buffer                                                                                          |
+| as_hex    | uint32_t | <p>Si es <code>1</code> muestra el buffer en hexadecimal.<br />Si es <code>0</code> lo muestra en UTF-8.</p> |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Nombre  | Tipo    | Descripción                                                         |
-| ------- | ------- | ------------------------------------------------------------------- |
-| message | string  | Mensaje (clave de log) a mostrar antes del buffer (puede ser null)  |
-| data    | any     | Datos a registrar                                                   |
-| hex     | boolean | <p>¿Mostrar en HEX?<br /><br />0 - NO<br />1 - SÍ</p>                |
+| Nombre  | Tipo    | Descripción                                                        |
+| ------- | ------- | ------------------------------------------------------------------ |
+| message | string  | Mensaje (clave de log) a mostrar antes del buffer (puede ser null) |
+| data    | any     | Datos a registrar                                                  |
+| hex     | boolean | <p>¿Mostrar en HEX?<br /><br />0 - NO<br />1 - SÍ</p>              |
 </TabItem>
 </Tabs>
 
@@ -78,14 +80,14 @@ trace("Contenido del buffer", some_buffer, 1);
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                                                                                                                                             |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tipo    | Descripción                                                                                                                                          |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | int64_t | <p><code>0</code> si tiene éxito<br /><br />Si es negativo, error:<br /><code>OUT_OF_BOUNDS</code><br />- punteros fuera de la memoria del hook.</p> |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo      | Descripción                                                                                      |
-| --------- | ------------------------------------------------------------------------------------------------ |
-| ErrorCode | <p>int64_t, valor 0 si tiene éxito</p><p></p><p>Si es negativo, error: OUT_OF_BOUNDS</p>         |
+| Tipo      | Descripción                                                                            |
+| --------- | -------------------------------------------------------------------------------------- |
+| ErrorCode | <p>int64_t, valor 0 si tiene éxito</p><p /><p>Si es negativo, error: OUT_OF_BOUNDS</p> |
 </TabItem>
 </Tabs>
