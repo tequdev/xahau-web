@@ -1,12 +1,11 @@
 ---
 title: URITokenCancelSellOffer
-description: >-
-  Una transacción URITokenCancelSellOffer cancela una oferta de venta de un
-  URIToken en Xahau.
+description: Una transacción URITokenCancelSellOffer cancela una oferta de venta de un URIToken en Xahau.
 ---
-\[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
 
-_(Añadido por la enmienda \[URIToken]\[].)_
+[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
+
+*(Añadido por la enmienda [URIToken][].)*
 
 ### Ejemplo
 
@@ -20,15 +19,15 @@ _(Añadido por la enmienda \[URIToken]\[].)_
 
 ### Campos
 
-| Campo        | Tipo JSON | \[Tipo Interno]\[] | Descripción                                                    |
-| ------------ | --------- | ------------------- | -------------------------------------------------------------- |
-| `Account`    | String    | AccountID           | La dirección de la cuenta propietaria de la oferta de venta a cancelar. |
-| `URITokenID` | String    | Hash256             | El ID del URIToken cuya oferta de venta se cancela.            |
+| Campo        | Tipo JSON | [Tipo Interno][] | Descripción                                                             |
+| ------------ | --------- | ---------------- | ----------------------------------------------------------------------- |
+| `Account`    | String    | AccountID        | La dirección de la cuenta propietaria de la oferta de venta a cancelar. |
+| `URITokenID` | String    | Hash256          | El ID del URIToken cuya oferta de venta se cancela.                     |
 
 ### Casos de Error
 
 Además de los errores que pueden ocurrir para todas las transacciones, las transacciones URITokenCancelSellOffer pueden resultar en los siguientes códigos de resultado:
 
-| Código de Error    | Descripción                                                             |
-| ------------------ | ----------------------------------------------------------------------- |
+| Código de Error    | Descripción                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------- |
 | `tecNO_PERMISSION` | Ocurre cuando la cuenta que ejecuta la transacción no es el propietario del token. |
