@@ -2,23 +2,24 @@
 title: Grants
 description: Hook Grants
 ---
+
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="caution">
   La mayoría de los desarrolladores de Hooks rara vez necesitarán usar HookGrants, y deben extremar la precaución al otorgar permisos de modificación de estado a Hooks y cuentas externas.
 
   Aunque un HookGrant no puede utilizarse directamente para robar fondos, la modificación externa intencionada del estado de un Hook puede hacer que este se comporte de forma inesperada, lo que en algunos casos podría derivar en un robo.
-  
+
   Si crees que necesitas usar un Grant, revisa primero tu diseño para asegurarte de que realmente es necesario antes de continuar.
 </Aside>
 
 ### Grants
 
-Los Grants proporcionan una forma para que quien instala un Hook asigne permisos de [gestión de estado](/es/docs/hooks/concepts/state-management) a un Hook _externo_ en otras cuentas de Xahau.
+Los Grants proporcionan una forma para que quien instala un Hook asigne permisos de [gestión de estado](/es/docs/hooks/concepts/state-management) a un Hook *externo* en otras cuentas de Xahau.
 
 Una [transacción SetHook](/es/docs/hooks/concepts/sethook-transaction) puede especificar un array `HookGrants` dentro de cualquier objeto `Hook` en su array `Hooks`. El array `HookGrants` contiene uno o más objetos `HookGrant` (hasta un máximo de 8).
 
-A diferencia de los [Parameters](/es/docs/hooks/concepts/parameters), el array `HookGrants` siempre se establece exactamente como se especifica en la [transacción SetHook](/es/docs/hooks/concepts/sethook-transaction). Por lo tanto, si deseas actualizar un `HookGrant` manteniendo otros previamente definidos, debes obtener primero el array existente, modificarlo y reenviar el array completo en una operación de [_Update_](/es/docs/hooks/concepts/sethook-transaction).
+A diferencia de los [Parameters](/es/docs/hooks/concepts/parameters), el array `HookGrants` siempre se establece exactamente como se especifica en la [transacción SetHook](/es/docs/hooks/concepts/sethook-transaction). Por lo tanto, si deseas actualizar un `HookGrant` manteniendo otros previamente definidos, debes obtener primero el array existente, modificarlo y reenviar el array completo en una operación de [*Update*](/es/docs/hooks/concepts/sethook-transaction).
 
 Para eliminar todos los Grants, envía un array `HookGrants` vacío.
 
@@ -69,7 +70,7 @@ Hooks:
     }   
 ],  
 ... 
-````
+```
 
 El *primer grant* anterior permite:
 
