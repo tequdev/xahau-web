@@ -15,7 +15,7 @@ Las comisiones de ejecución de Hooks se cobran a razón de 1 drop por instrucci
 
 ### Helper RPC de comisiones
 
-Las comisiones de transacción en un ledger con la enmienda Hooks habilitada se vuelven complejas de calcular para usuarios finales y/o aplicaciones de cartera. Esto se debe a que los Hooks fuertes deben ser pagados por el originador de la transacción, y puede haber hasta 4 Hooks fuertes en la cuenta emisora y 4 en la cuenta receptora, además de otros posibles participantes transaccionales fuertes (como ocurre en algunos tipos de transacciones más complejos). Además, si la transacción es un SetHook, el tamaño de los parámetros, el tamaño del código y si se trata de una operación de _create_ o _install_ también afectan a la comisión.
+Las comisiones de transacción en un ledger con la enmienda Hooks habilitada se vuelven complejas de calcular para usuarios finales y/o aplicaciones de cartera. Esto se debe a que los Hooks fuertes deben ser pagados por el originador de la transacción, y puede haber hasta 4 Hooks fuertes en la cuenta emisora y 4 en la cuenta receptora, además de otros posibles participantes transaccionales fuertes (como ocurre en algunos tipos de transacciones más complejos). Además, si la transacción es un SetHook, el tamaño de los parámetros, el tamaño del código y si se trata de una operación de *create* o *install* también afectan a la comisión.
 
 Por lo tanto, se recomienda encarecidamente que **todas** las transacciones se pasen por la llamada RPC de comisiones actualizada antes de enviarlas al ledger.
 
@@ -32,7 +32,7 @@ Para invocar la llamada RPC:
 
 ```json
 {"command":"fee", "tx_blob":"<hex blob>"}
-````
+```
 
 Para HTTP POST RPC:
 
@@ -40,7 +40,7 @@ Para HTTP POST RPC:
 {"method":"fee", "params": [{"tx_blob":"<hex blob>"}] }
 ```
 
-La respuesta tendrá un formato similar a:
+The response should look something like
 
 ```json
 {
@@ -58,8 +58,8 @@ Toma el valor de `base_fee` y establécelo como el campo `Fee` en la transacció
 
 Si `tx_blob` es inválido o falta, se devolverá un resultado JSON estándar con un `base_fee` de 10.
 
-### Comisiones de emisión
+### Emission Fees
 
-Los Hooks tienen acceso al mismo cálculo que el *Fee RPC Helper*. Para usarlo, llama a [etxn_fee_base](/es/docs/hooks/functions/emitted-transaction/etxn_fee_base) pasando como argumento un buffer con la transacción serializada. Al igual que en la llamada RPC, debes asegurarte de que el campo `Fee` está presente en la transacción serializada (su valor es irrelevante).
+Los Hooks tienen acceso al mismo cálculo que el *Fee RPC Helper*. Para usarlo, llama a [etxn_fee_base](/es/docs/hooks/functions/emitted-transaction/etxn_fee_base) pasando como argumento un buffer con la transacción serializada. Al igual que en la llamada RPC, debes asegurarte de que el campo `Fee` está presente en la transacción serializada (su valor es irrelevante). The value is irrelevant.
 
 Cuando `etxn_fee_base` devuelve la comisión recomendada, puedes usar [sto_emplace](/es/docs/hooks/functions/serialization/sto_emplace) para insertarla en la transacción serializada antes de emitirla. El campo correspondiente es `sfFee`.
