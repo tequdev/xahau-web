@@ -1,18 +1,17 @@
 ---
 title: DepositPreauth
-description: >-
-  Una transacción DepositPreauth otorga pre-aprobación a otra cuenta para
-  entregar pagos al emisor de esta transacción.
+description: Una transacción DepositPreauth otorga pre-aprobación a otra cuenta para entregar pagos al emisor de esta transacción.
 ---
+
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="tip">
   Puede usar esta transacción para preautorizar ciertas contrapartes antes de habilitar la Autorización de Depósito. Esto puede ser útil para garantizar una transición sin problemas de no requerir autorización de depósito a requerirla.
 </Aside>
 
-\[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
+[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
 
-_Añadido por la enmienda \[DepositPreauth]\[]._
+*Añadido por la enmienda [DepositPreauth][].*
 
 ### Ejemplo
 
@@ -29,12 +28,12 @@ _Añadido por la enmienda \[DepositPreauth]\[]._
 
 ### Campos
 
-| Campo         | Tipo JSON | \[Tipo Interno]\[] | Descripción                                                                      |
-| ------------- | --------- | ------------------- | -------------------------------------------------------------------------------- |
-| `Authorize`   | String    | AccountID           | _(Opcional)_ Dirección Xahau del emisor a preautorizar.                          |
-| `Unauthorize` | String    | AccountID           | _(Opcional)_ Dirección Xahau de un emisor cuya preautorización debe revocarse.   |
+| Campo         | Tipo JSON | [Tipo Interno][] | Descripción                                                                    |
+| ------------- | --------- | ---------------- | ------------------------------------------------------------------------------ |
+| `Authorize`   | String    | AccountID        | *(Opcional)* Dirección Xahau del emisor a preautorizar.                        |
+| `Unauthorize` | String    | AccountID        | *(Opcional)* Dirección Xahau de un emisor cuya preautorización debe revocarse. |
 
-Debe proporcionar _`Authorize`_ o _`Unauthorize`_, pero no ambos.
+Debe proporcionar *`Authorize`* o *`Unauthorize`*, pero no ambos.
 
 ### Casos de Error
 

@@ -2,6 +2,7 @@
 title: float_sum
 description: Sumar dos números XFL
 ---
+
 import { Tabs, TabItem, LinkButton, Aside } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -31,7 +32,8 @@ int64_t float_sum (
     int64_t float1,
     int64_t float2
 );
-````
+```
+
 
 </TabItem>
 
@@ -50,6 +52,8 @@ function float_sum(f1: bigint, f2: bigint): ErrorCode | bigint
 int64_t two =
     float_sum(float_one(), float_one());
 ```
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -64,10 +68,12 @@ const two =
 
 <Tabs>
 <TabItem label="C">
-| Nombre | Tipo     | Descripción                                                                 |
-| ------ | -------- | --------------------------------------------------------------------------- |
-| float1 | int64_t  | Número XFL que representa el primer operando de la suma                    |
-| float2 | int64_t  | Número XFL que representa el segundo operando de la suma                   |
+
+
+| Nombre | Tipo    | Descripción                                              |
+| ------ | ------- | -------------------------------------------------------- |
+| float1 | int64_t | Número XFL que representa el primer operando de la suma  |
+| float2 | int64_t | Número XFL que representa el segundo operando de la suma |
 
 <Aside type="tip">
 Para restar dos valores flotantes, usa `float_negate` en el segundo valor y luego `float_sum`.
@@ -75,10 +81,12 @@ Para restar dos valores flotantes, usa `float_negate` en el segundo valor y lueg
 </TabItem>
 
 <TabItem label="JavaScript">
-| Nombre | Tipo   | Descripción                 |
-| ------ | ------ | --------------------------- |
-| f1     | bigint | Primer número a sumar       |
-| f2     | bigint | Segundo número a sumar      |
+
+
+| Nombre | Tipo   | Descripción              |
+| ------ | ------ | ------------------------ |
+| f1     | bigint | The first float to sum.  |
+| f2     | bigint | The second float to sum. |
 </TabItem>
 </Tabs>
 
@@ -86,14 +94,14 @@ Para restar dos valores flotantes, usa `float_negate` en el segundo valor y lueg
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                                                                                                                                                                                                 |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| int64_t  | <p>El número XFL (xls17)<br /><br />Si es negativo, error:<br /><code>INVALID_FLOAT</code><br />- alguno de los parámetros no es válido<br /><br /><code>OVERFLOW</code><br />- la suma es demasiado grande</p> |
+| Tipo    | Descripción                                                                                                                                                                                                     |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| int64_t | <p>El número XFL (xls17)<br /><br />Si es negativo, error:<br /><code>INVALID_FLOAT</code><br />- alguno de los parámetros no es válido<br /><br /><code>OVERFLOW</code><br />- la suma es demasiado grande</p> |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo                | Descripción                          |
-| ------------------- | ------------------------------------ |
-| ErrorCode o bigint  | Un código de error o la suma         |
+| Tipo               | Descripción                  |
+| ------------------ | ---------------------------- |
+| ErrorCode o bigint | Un código de error o la suma |
 </TabItem>
 </Tabs>

@@ -2,6 +2,7 @@
 title: Ajustes de Balance
 description: Cómo reclamar un Ajuste de Balance en Xahau
 ---
+
 ### Opt-in + Reclamar
 
 Optar por los Ajustes de Balance es la misma transacción que reclamar un ajuste. Debe hacerlo primero para iniciar la capacidad de reclamar más adelante.
@@ -50,10 +51,10 @@ Todas las interacciones con esta enmienda son mediante la transacción ClaimRewa
 
 Cuando una transacción ClaimReward se envía exitosamente con un código de error **tesSUCCESS**, las estadísticas de balance promedio de la cuenta se restablecen. Lo único adicional que hace la enmienda es invocar los Hooks en la cuenta del Emisor especificado.
 
-El campo _Issuer_ es la cuenta responsable de cumplir con el reclamo. Dependiendo de lo que esté instalado en la cuenta del Emisor, pueden ocurrir varias cosas:
+El campo *Issuer* es la cuenta responsable de cumplir con el reclamo. Dependiendo de lo que esté instalado en la cuenta del Emisor, pueden ocurrir varias cosas:
 
 * Si no hay ningún Hook instalado en la cuenta del Emisor, entonces no se hace nada y las estadísticas de BalanceRewards simplemente se restablecen.
-* Si hay un Hook instalado en la cuenta del Emisor y el Hook realiza un rollback, entonces la transacción falla y las estadísticas _no_ se restablecen.
+* Si hay un Hook instalado en la cuenta del Emisor y el Hook realiza un rollback, entonces la transacción falla y las estadísticas *no* se restablecen.
 * Si hay un Hook instalado en la cuenta del Emisor y el Hook realiza accept, entonces la transacción tiene éxito y las estadísticas se restablecen. En este caso, el Hook también debería emitir una transacción de vuelta a la cuenta del usuario que contenga su recompensa.
 
 En la práctica, en Xahau, el Emisor probablemente siempre será la cuenta génesis **rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh**.

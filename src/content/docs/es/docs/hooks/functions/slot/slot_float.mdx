@@ -1,8 +1,8 @@
 ---
 title: slot_float
-description: >-
-  Parsear el STI_AMOUNT en el slot especificado y devolverlo como un número XFL encapsulado
+description: Parsear el STI_AMOUNT en el slot especificado y devolverlo como un número XFL encapsulado
 ---
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### Comportamiento
@@ -26,8 +26,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 int64_t slot_float (
     uint32_t slot_no
 );
-````
-
+```
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -45,6 +44,8 @@ function slot_float(slotno: number): ErrorCode | bigint
 int64_t xfl =
   	slot_float(amt_slot);
 ```
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -58,15 +59,15 @@ const xfl = slot_float(amt_slot)
 
 <Tabs>
 <TabItem label="C">
-| Nombre  | Tipo     | Descripción       |
-| ------- | -------- | ----------------- |
-| slot_no | uint32_t | Número del slot   |
+| Nombre  | Tipo     | Descripción     |
+| ------- | -------- | --------------- |
+| slot_no | uint32_t | Número del slot |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Nombre | Tipo   | Descripción                                              |
-| ------ | ------ | -------------------------------------------------------- |
-| slotno | number | Número del slot del que obtener el valor bigint          |
+| Nombre | Tipo   | Descripción                                     |
+| ------ | ------ | ----------------------------------------------- |
+| slotno | number | Número del slot del que obtener el valor bigint |
 </TabItem>
 </Tabs>
 
@@ -74,14 +75,14 @@ const xfl = slot_float(amt_slot)
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                                                                                                                                                                                                                                                                    |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Tipo    | Descripción                                                                                                                                                                                                                                             |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | int64_t | <p>Número en formato XFL<br /><br />Si es negativo, error:<br /><code>DOESNT_EXIST</code><br />- el slot no contiene ningún objeto o es inválido<br /><br /><code>NOT_AN_AMOUNT</code><br />- el slot no contiene un objeto <code>STI_AMOUNT</code></p> |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo                | Descripción                                |
-| ------------------- | ------------------------------------------ |
-| bigint o ErrorCode  | Devuelve un código de error o el valor bigint |
+| Tipo               | Descripción                                   |
+| ------------------ | --------------------------------------------- |
+| bigint o ErrorCode | Devuelve un código de error o el valor bigint |
 </TabItem>
 </Tabs>

@@ -2,6 +2,7 @@
 title: otxn_type
 description: Obtener el tipo de transacción de la transacción origen
 ---
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### Comportamiento
@@ -16,7 +17,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 int64_t otxn_type (
     void
 );
-````
+```
+
 
 </TabItem>
 
@@ -52,15 +54,15 @@ Ninguno
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                                                                                                                              |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| int64_t  | El tipo de transacción de la transacción origen. Consulta la tabla inferior para los valores conocidos                                  |
+| Tipo    | Descripción                                                                                            |
+| ------- | ------------------------------------------------------------------------------------------------------ |
+| int64_t | El tipo de transacción de la transacción origen. Consulta la tabla inferior para los valores conocidos |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo                | Descripción                                                                 |
-| ------------------- | --------------------------------------------------------------------------- |
-| ErrorCode \| number | Devuelve el tipo de transacción como número o un ErrorCode si falla         |
+| Tipo                | Descripción                                                         |
+| ------------------- | ------------------------------------------------------------------- |
+| ErrorCode \| number | Devuelve el tipo de transacción como número o un ErrorCode si falla |
 </TabItem>
 </Tabs>
 

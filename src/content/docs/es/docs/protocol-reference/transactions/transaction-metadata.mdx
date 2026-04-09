@@ -1,6 +1,7 @@
 ---
 title: Metadatos de Transacción
 ---
+
 Los metadatos de transacción son una sección de datos que se añade a una transacción después de ser procesada. Cualquier transacción que se incluye en un ledger tiene metadatos, independientemente de si fue exitosa. Los metadatos de transacción describen en detalle el resultado de la transacción.
 
 :::caution
@@ -510,40 +511,40 @@ El valor de cada uno de estos campos es un objeto JSON que describe los cambios 
 
 Un objeto `CreatedNode` contiene los siguientes campos:
 
-| Campo             | Valor               | Descripción                                                                                                                                                |
-| ----------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LedgerEntryType` | String              | El tipo de objeto de ledger que fue creado.                                                                                                                |
-| `LedgerIndex`     | String - \[Hash]\[] | El ID de este objeto de ledger en el árbol de estado del ledger. **Nota:** Este **no es lo mismo** que un índice de ledger, aunque el nombre del campo es muy similar. |
-| `NewFields`       | Object              | Los campos de contenido del objeto de ledger recién creado. Los campos presentes dependen del tipo de objeto de ledger que fue creado.                     |
+| Campo             | Valor             | Descripción                                                                                                                                                            |
+| ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LedgerEntryType` | String            | El tipo de objeto de ledger que fue creado.                                                                                                                            |
+| `LedgerIndex`     | String - [Hash][] | El ID de este objeto de ledger en el árbol de estado del ledger. **Nota:** Este **no es lo mismo** que un índice de ledger, aunque el nombre del campo es muy similar. |
+| `NewFields`       | Object            | Los campos de contenido del objeto de ledger recién creado. Los campos presentes dependen del tipo de objeto de ledger que fue creado.                                 |
 
 #### Campos DeletedNode
 
 Un objeto `DeletedNode` contiene los siguientes campos:
 
-| Campo             | Valor               | Descripción                                                                                                                                                |
-| ----------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LedgerEntryType` | String              | El tipo de objeto de ledger que fue eliminado.                                                                                                             |
-| `LedgerIndex`     | String - \[Hash]\[] | El ID de este objeto de ledger en el árbol de estado del ledger. **Nota:** Este **no es lo mismo** que un índice de ledger, aunque el nombre del campo es muy similar. |
-| `FinalFields`     | Object              | Los campos de contenido del objeto de ledger inmediatamente antes de ser eliminado. Los campos presentes dependen del tipo de objeto de ledger que fue creado. |
+| Campo             | Valor             | Descripción                                                                                                                                                            |
+| ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LedgerEntryType` | String            | El tipo de objeto de ledger que fue eliminado.                                                                                                                         |
+| `LedgerIndex`     | String - [Hash][] | El ID de este objeto de ledger en el árbol de estado del ledger. **Nota:** Este **no es lo mismo** que un índice de ledger, aunque el nombre del campo es muy similar. |
+| `FinalFields`     | Object            | Los campos de contenido del objeto de ledger inmediatamente antes de ser eliminado. Los campos presentes dependen del tipo de objeto de ledger que fue creado.         |
 
 #### Campos ModifiedNode
 
 Un objeto `ModifiedNode` contiene los siguientes campos:
 
-| Campo               | Valor                       | Descripción                                                                                                                                                                                                                                                                              |
-| ------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LedgerEntryType`   | String                      | El tipo de objeto de ledger que fue eliminado.                                                                                                                                                                                                                                           |
-| `LedgerIndex`       | String - \[Hash]\[]         | El ID de este objeto de ledger en el árbol de estado del ledger. **Nota:** Este **no es lo mismo** que un índice de ledger, aunque el nombre del campo es muy similar.                                                                                                                   |
-| `FinalFields`       | Object                      | Los campos de contenido del objeto de ledger después de aplicar cualquier cambio de esta transacción. Los campos presentes dependen del tipo de objeto de ledger que fue creado. Omite los campos `PreviousTxnID` y `PreviousTxnLgrSeq`, aunque la mayoría de los tipos de objetos de ledger los tienen. |
-| `PreviousFields`    | Object                      | Los valores anteriores de todos los campos del objeto que fueron cambiados como resultado de esta transacción. Si la transacción _solo añadió_ campos al objeto, este campo es un objeto vacío.                                                                                          |
-| `PreviousTxnID`     | String - \[Hash]\[]         | _(Puede omitirse)_ El \[hash identificador]\[] de la transacción anterior que modificó este objeto de ledger. Omitido para tipos de objetos de ledger que no tienen un campo `PreviousTxnID`.                                                                                            |
-| `PreviousTxnLgrSeq` | Number - \[Ledger Index]\[] | _(Puede omitirse)_ El \[Ledger Index]\[] de la versión del ledger que contiene la transacción anterior que modificó este objeto de ledger. Omitido para tipos de objetos de ledger que no tienen un campo `PreviousTxnLgrSeq`.                                                           |
+| Campo               | Valor                     | Descripción                                                                                                                                                                                                                                                                                              |
+| ------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LedgerEntryType`   | String                    | El tipo de objeto de ledger que fue eliminado.                                                                                                                                                                                                                                                           |
+| `LedgerIndex`       | String - [Hash][]         | El ID de este objeto de ledger en el árbol de estado del ledger. **Nota:** Este **no es lo mismo** que un índice de ledger, aunque el nombre del campo es muy similar.                                                                                                                                   |
+| `FinalFields`       | Object                    | Los campos de contenido del objeto de ledger después de aplicar cualquier cambio de esta transacción. Los campos presentes dependen del tipo de objeto de ledger que fue creado. Omite los campos `PreviousTxnID` y `PreviousTxnLgrSeq`, aunque la mayoría de los tipos de objetos de ledger los tienen. |
+| `PreviousFields`    | Object                    | Los valores anteriores de todos los campos del objeto que fueron cambiados como resultado de esta transacción. Si la transacción *solo añadió* campos al objeto, este campo es un objeto vacío.                                                                                                          |
+| `PreviousTxnID`     | String - [Hash][]         | *(Puede omitirse)* El [hash identificador][] de la transacción anterior que modificó este objeto de ledger. Omitido para tipos de objetos de ledger que no tienen un campo `PreviousTxnID`.                                                                                                              |
+| `PreviousTxnLgrSeq` | Number - [Ledger Index][] | *(Puede omitirse)* El [Ledger Index][] de la versión del ledger que contiene la transacción anterior que modificó este objeto de ledger. Omitido para tipos de objetos de ledger que no tienen un campo `PreviousTxnLgrSeq`.                                                                             |
 
 **Nota:** Si el objeto de ledger modificado tiene campos `PreviousTxnID` y `PreviousTxnLgrSeq`, la transacción siempre los actualiza con el hash identificador propio de la transacción y el índice de la versión del ledger que incluyó la transacción, pero el nuevo valor de estos campos no aparece en `FinalFields` del objeto `ModifiedNode`, y sus valores anteriores se listan en el nivel superior del objeto `ModifiedNode` en lugar del objeto anidado `PreviousFields`.
 
 ### delivered_amount
 
-El `Amount` de una \[transacción Payment]\[] indica la cantidad a entregar al `Destination`, por lo que si la transacción fue exitosa, el destinatario recibió esa cantidad — **excepto si la transacción fue un pago parcial**. (En ese caso, cualquier cantidad positiva hasta `Amount` podría haber llegado.) En lugar de decidir si confiar o no en el campo `Amount`, debes usar el campo `delivered_amount` de los metadatos para ver cuánto llegó realmente a su destino.
+El `Amount` de una [transacción Payment][] indica la cantidad a entregar al `Destination`, por lo que si la transacción fue exitosa, el destinatario recibió esa cantidad — **excepto si la transacción fue un pago parcial**. (En ese caso, cualquier cantidad positiva hasta `Amount` podría haber llegado.) En lugar de decidir si confiar o no en el campo `Amount`, debes usar el campo `delivered_amount` de los metadatos para ver cuánto llegó realmente a su destino.
 
 El servidor `rippled` proporciona un campo `delivered_amount` en los metadatos de transacción JSON para todas las transacciones Payment exitosas. Este campo tiene el formato de una cantidad de moneda normal. Sin embargo, el monto entregado no está disponible para transacciones que cumplen ambos criterios siguientes:
 

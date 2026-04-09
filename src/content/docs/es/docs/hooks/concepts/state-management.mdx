@@ -2,11 +2,12 @@
 title: Gestión de estado
 description: Los Hooks pueden leer y guardar pequeños fragmentos de datos en el ledger 🚀
 ---
+
 import { Aside } from '@astrojs/starlight/components';
 
 ### ¿Qué es el estado de un Hook?
 
-El [estado](https://en.wikipedia.org/wiki/State_\(computer_science\)) en informática describe la información que un sistema mantiene entre ejecuciones (a diferencia de entradas y salidas). Por ejemplo, tu navegador te mantiene conectado a un sitio web incluso después de cerrarlo y volver a abrirlo. La cookie de sesión se guarda en el _estado_ del navegador.
+El [estado](https://en.wikipedia.org/wiki/State_\(computer_science\)) en informática describe la información que un sistema mantiene entre ejecuciones (a diferencia de entradas y salidas). Por ejemplo, tu navegador te mantiene conectado a un sitio web incluso después de cerrarlo y volver a abrirlo. La cookie de sesión se guarda en el *estado* del navegador.
 
 El **estado de un Hook** se refiere a un mapeo clave-valor que existe lógicamente para cada cuenta en Xahau, independientemente de si actualmente hay claves almacenadas o no. Las claves son siempre de 32 bytes (entero sin signo de 256 bits) y los valores tienen longitud variable, con un tamaño máximo determinado por votación de validadores (en el momento de escribir esto, 256 bytes).
 
@@ -32,7 +33,7 @@ if (state_set(value, 4, key, 32) == 4)
 {
     // ... estado guardado correctamente
 }
-````
+```
 
 En una ejecución posterior del Hook, este valor puede recuperarse utilizando la misma clave:
 

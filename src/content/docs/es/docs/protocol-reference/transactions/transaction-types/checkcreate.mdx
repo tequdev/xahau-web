@@ -1,13 +1,11 @@
 ---
 title: CheckCreate
-description: >-
-  Crea un objeto Check en el ledger, que es un pago diferido que puede ser
-  canjeado por su destino previsto. El emisor de esta transacción es el
-  emisor del Check.
+description: Crea un objeto Check en el ledger, que es un pago diferido que puede ser canjeado por su destino previsto. El emisor de esta transacción es el emisor del Check.
 ---
-\[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
 
-_(Añadido por la enmienda \[Checks]\[].)_
+[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
+
+*(Añadido por la enmienda [Checks][].)*
 
 ### Ejemplo
 
@@ -24,13 +22,13 @@ _(Añadido por la enmienda \[Checks]\[].)_
 }
 ```
 
-| Campo            | Tipo JSON                                                                                                                          | \[Tipo Interno]\[] | Descripción                                                                                                                                                                                                                                                                                                 |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Destination`    | String                                                                                                                             | AccountID           | La dirección única de la cuenta que puede canjear el Check.                                                                                                                                                                                                                                                 |
-| `SendMax`        | [Monto de Moneda](/es/docs/protocol-reference/data-types/currency-formats/#especificando-montos-de-moneda) | Amount              | Monto máximo de moneda fuente que el Check puede debitar al emisor, incluyendo tarifas de transferencia en monedas que no son XAH. El Check solo puede acreditar al destino con la misma moneda (del mismo emisor, para monedas que no son XAH). Para montos que no son XAH, los nombres de campos anidados DEBEN estar en minúsculas. |
-| `DestinationTag` | Number                                                                                                                             | UInt32              | _(Opcional)_ Etiqueta arbitraria que identifica la razón del Check, o un destinatario alojado al que pagar.                                                                                                                                                                                                 |
-| `Expiration`     | Number                                                                                                                             | UInt32              | _(Opcional)_ Tiempo después del cual el Check ya no es válido, en \[segundos desde la Época Ripple]\[].                                                                                                                                                                                                     |
-| `InvoiceID`      | String                                                                                                                             | Hash256             | _(Opcional)_ Hash arbitrario de 256 bits que representa una razón o identificador específico para este Check.                                                                                                                                                                                               |
+| Campo            | Tipo JSON                                                                                                  | [Tipo Interno][] | Descripción                                                                                                                                                                                                                                                                                                                            |
+| ---------------- | ---------------------------------------------------------------------------------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Destination`    | String                                                                                                     | AccountID        | La dirección única de la cuenta que puede canjear el Check.                                                                                                                                                                                                                                                                            |
+| `SendMax`        | [Monto de Moneda](/es/docs/protocol-reference/data-types/currency-formats/#especificando-montos-de-moneda) | Amount           | Monto máximo de moneda fuente que el Check puede debitar al emisor, incluyendo tarifas de transferencia en monedas que no son XAH. El Check solo puede acreditar al destino con la misma moneda (del mismo emisor, para monedas que no son XAH). Para montos que no son XAH, los nombres de campos anidados DEBEN estar en minúsculas. |
+| `DestinationTag` | Number                                                                                                     | UInt32           | *(Opcional)* Etiqueta arbitraria que identifica la razón del Check, o un destinatario alojado al que pagar.                                                                                                                                                                                                                            |
+| `Expiration`     | Number                                                                                                     | UInt32           | *(Opcional)* Tiempo después del cual el Check ya no es válido, en [segundos desde la Época Ripple][].                                                                                                                                                                                                                                  |
+| `InvoiceID`      | String                                                                                                     | Hash256          | *(Opcional)* Hash arbitrario de 256 bits que representa una razón o identificador específico para este Check.                                                                                                                                                                                                                          |
 
 ### Casos de Error
 

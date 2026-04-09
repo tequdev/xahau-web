@@ -1,0 +1,34 @@
+---
+title: Developer Tricks
+---
+
+## Wildcard signing
+
+To easily test & replay, use `NetworkID` with value `65535` (config: `[network_id]`) to disable signature verification.
+
+Added: [https://github.com/Xahau/xahaud/pull/201](https://github.com/Xahau/xahaud/pull/201)
+
+## Server Definitions
+
+Server definitions can easily be fetched from public nodes. These definitions include binary codec information and other network-specific data needed for transaction serialization and deserialization.
+
+### Mainnet
+
+* [`https://xahau.network/server_definitions.json`](https://xahau.network/server_definitions.json)
+
+### Testnet
+
+* [`https://xahau-test.net/server_definitions.json`](https://xahau-test.net/server_definitions.json)
+
+### JSHooks-Testnet
+
+* [`https://jshooks.xahau-test.net/server_definitions.json`](https://jshooks.xahau-test.net/server_definitions.json)
+
+These server definitions are essential for:
+
+* Binary codec operations
+* Transaction serialization
+* Field type definitions
+* Network-specific constants
+
+You can use these definitions in your applications to properly encode and decode transactions for the Xahau network.

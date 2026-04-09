@@ -1,12 +1,11 @@
 ---
 title: URITokenBurn
-description: >-
-  La transacción URITokenBurn se usa para quemar un URIToken en Xahau. Quemar
-  un URIToken lo elimina permanentemente de la circulación.
+description: La transacción URITokenBurn se usa para quemar un URIToken en Xahau. Quemar un URIToken lo elimina permanentemente de la circulación.
 ---
-[\[Source\]](https://github.com/ripple/rippled/blob/develop/src/ripple/app/tx/impl/URIToken.cpp)
 
-_(Añadido por la enmienda \[URIToken]\[].)_
+[[Source]](https://github.com/ripple/rippled/blob/develop/src/ripple/app/tx/impl/URIToken.cpp)
+
+*(Añadido por la enmienda [URIToken][].)*
 
 La transacción URITokenBurn se usa para quemar un URIToken en Xahau. Quemar un URIToken lo elimina permanentemente de la circulación.
 
@@ -20,10 +19,10 @@ La transacción URITokenBurn se usa para quemar un URIToken en Xahau. Quemar un 
 }
 ```
 
-| Campo        | Tipo JSON | \[Tipo Interno]\[] | Descripción                                                     |
-| ------------ | --------- | ------------------- | --------------------------------------------------------------- |
-| `Account`    | String    | AccountID           | La dirección de la cuenta propietaria del URIToken a quemar.    |
-| `URITokenID` | String    | Hash256             | El ID del URIToken a quemar.                                    |
+| Campo        | Tipo JSON | [Tipo Interno][] | Descripción                                                  |
+| ------------ | --------- | ---------------- | ------------------------------------------------------------ |
+| `Account`    | String    | AccountID        | La dirección de la cuenta propietaria del URIToken a quemar. |
+| `URITokenID` | String    | Hash256          | El ID del URIToken a quemar.                                 |
 
 ### Costo de Transacción Especial
 
@@ -33,6 +32,6 @@ La transacción URITokenBurn no tiene requisitos especiales de costo de transacc
 
 Además de los errores que pueden ocurrir para todas las transacciones, las transacciones URITokenBurn pueden resultar en los siguientes códigos de resultado:
 
-| Código de Error    | Descripción                                                       |
-| ------------------ | ----------------------------------------------------------------- |
-| `tecNO_PERMISSION` | Ocurre si la cuenta no tiene permiso para quemar el token.        |
+| Código de Error    | Descripción                                                |
+| ------------------ | ---------------------------------------------------------- |
+| `tecNO_PERMISSION` | Ocurre si la cuenta no tiene permiso para quemar el token. |

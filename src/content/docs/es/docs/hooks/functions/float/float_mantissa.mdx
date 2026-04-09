@@ -2,6 +2,7 @@
 title: float_mantissa
 description: Obtiene la mantisa de un número XFL
 ---
+
 import { Tabs, TabItem, LinkButton, Aside } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -29,8 +30,7 @@ import { Tabs, TabItem, LinkButton, Aside } from '@astrojs/starlight/components'
 int64_t float_mantissa (
     int64_t float1
 );
-````
-
+```
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -66,15 +66,15 @@ const mantissa =
 
 <Tabs>
 <TabItem label="C">
-| Nombre | Tipo   | Descripción                                 |
-| ------ | ------ | ------------------------------------------- |
-| f1     | bigint | El número flotante del que obtener la mantisa |
+| Nombre | Tipo   | Descripción                              |
+| ------ | ------ | ---------------------------------------- |
+| f1     | bigint | The float to retrieve the mantissa from. |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Nombre  | Tipo     | Descripción                             |
-| ------- | -------- | --------------------------------------- |
-| float1  | int64_t  | Número de punto flotante XFL            |
+| Nombre | Tipo    | Descripción                  |
+| ------ | ------- | ---------------------------- |
+| float1 | int64_t | Número de punto flotante XFL |
 </TabItem>
 </Tabs>
 
@@ -82,14 +82,14 @@ const mantissa =
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                                                                                                                                                    |
-| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| int64_t  | <p>La mantisa del XFL<br /><br />Si es negativo, error:<br /><code>INVALID_FLOAT</code><br />- el parámetro no es un número XFL válido</p> |
+| Tipo    | Descripción                                                                                                                                |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| int64_t | <p>La mantisa del XFL<br /><br />Si es negativo, error:<br /><code>INVALID_FLOAT</code><br />- el parámetro no es un número XFL válido</p> |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo                | Descripción                                 |
-| ------------------- | ------------------------------------------- |
-| bigint o ErrorCode  | Devuelve un código de error o la mantisa    |
+| Tipo               | Descripción                              |
+| ------------------ | ---------------------------------------- |
+| bigint o ErrorCode | Devuelve un código de error o la mantisa |
 </TabItem>
 </Tabs>

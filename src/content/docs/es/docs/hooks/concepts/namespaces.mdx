@@ -11,7 +11,7 @@ El namespace puede ser cualquier valor arbitrario de 32 bytes elegido por el des
 
 Recomendamos encarecidamente usar `SHA256` sobre el nombre de trabajo del Hook definido por el desarrollador. SHA256 es uno de los dos algoritmos de hash utilizados en la generación de direcciones en Xahau (a partir de la clave maestra de una cuenta), por lo que suele estar fácilmente disponible para el desarrollador.
 
-El campo `HookNamespace` se proporciona como un blob _hexadecimal_ de 32 bytes dentro de cada objeto `Hook` en el array `Hooks` al [ejecutar una transacción SetHook](/es/docs/hooks/concepts/sethook-transaction).
+El campo `HookNamespace` se proporciona como un blob *hexadecimal* de 32 bytes dentro de cada objeto `Hook` en el array `Hooks` al [ejecutar una transacción SetHook](/es/docs/hooks/concepts/sethook-transaction).
 
 El namespace configurado bajo el que opera un Hook modifica los [Keylets](/es/docs/hooks/concepts/slots-and-keylets) bajo los que se almacena su [estado](/es/docs/hooks/concepts/state-management). Por lo tanto, dos Hooks bajo diferentes namespaces instalados en la misma cuenta de Xahau pueden usar la misma clave de estado para referirse a diferentes objetos de estado. Por el contrario, dos Hooks distintos que utilicen el mismo namespace en la misma cuenta pueden acceder y modificar los objetos de estado del otro utilizando las mismas claves.
 
@@ -22,7 +22,7 @@ En JavaScript, al importar `ripple-address-codec` se obtiene acceso a SHA256.\
 
 ```js
 HookNamespace: addr.codec.sha256('carbon').toString('hex')
-````
+```
 
 ### Namespace por defecto
 

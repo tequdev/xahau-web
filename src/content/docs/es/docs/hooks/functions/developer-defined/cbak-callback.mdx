@@ -2,6 +2,7 @@
 title: cbak / Callback
 description: La función de callback de tu hook
 ---
+
 import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -22,8 +23,7 @@ import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 int64_t cbak (
     uint32_t what
 )
-````
-
+```
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -43,6 +43,8 @@ int64_t cbak(uint32_t reserved)
     return 0;
 }
 ```
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -58,14 +60,14 @@ const Callback = (reserved: number) => {
 
 <Tabs>
 <TabItem label="C">
-| Nombre   | Tipo      | Descripción                                                                                                                                                                                                                                                     |
-| -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reserved | uint32_t  | <p>si es <code>0</code>:<br />- la transacción emitida asociada a este callback fue aceptada correctamente en un ledger.<br /><br />si es <code>1</code>:<br />- la transacción emitida NO fue aceptada antes de expirar.</p> |
+| Nombre   | Tipo     | Descripción                                                                                                                                                                                                                   |
+| -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reserved | uint32_t | <p>si es <code>0</code>:<br />- la transacción emitida asociada a este callback fue aceptada correctamente en un ledger.<br /><br />si es <code>1</code>:<br />- la transacción emitida NO fue aceptada antes de expirar.</p> |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Nombre   | Tipo   | Descripción                                                                                                                                                                                                                                                     |
-| -------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Nombre   | Tipo   | Descripción                                                                                                                                                                                                                   |
+| -------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reserved | number | <p>si es <code>0</code>:<br />- la transacción emitida asociada a este callback fue aceptada correctamente en un ledger.<br /><br />si es <code>1</code>:<br />- la transacción emitida NO fue aceptada antes de expirar.</p> |
 </TabItem>
 </Tabs>
@@ -74,14 +76,14 @@ const Callback = (reserved: number) => {
 
 <Tabs>
 <TabItem label="C">
-| Tipo    | Descripción                                                                                                                                       |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| int64_t | Un código de retorno arbitrario que desees devolver desde tu hook. Estará presente en los metadatos de la transacción originaria.               |
+| Tipo    | Descripción                                                                                                                       |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| int64_t | Un código de retorno arbitrario que desees devolver desde tu hook. Estará presente en los metadatos de la transacción originaria. |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo   | Descripción                                                                                                                                       |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| number | Un código de retorno arbitrario que desees devolver desde tu hook. Estará presente en los metadatos de la transacción originaria.               |
+| Tipo   | Descripción                                                                                                                       |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| number | Un código de retorno arbitrario que desees devolver desde tu hook. Estará presente en los metadatos de la transacción originaria. |
 </TabItem>
 </Tabs>

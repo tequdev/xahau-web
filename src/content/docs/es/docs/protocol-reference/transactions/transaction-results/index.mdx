@@ -1,18 +1,19 @@
 ---
 title: Resultados de Transacciones
 ---
-[\[Source\]](https://github.com/ripple/rippled/blob/master/src/ripple/protocol/TER.h)
+
+[[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/protocol/TER.h)
 
 El servidor `rippled` resume los resultados de las transacciones con códigos de resultado, que aparecen en campos como `engine_result` y `meta.TransactionResult`. Estos códigos se agrupan en varias categorías con diferentes prefijos:
 
-| Categoría             | Prefijo | Descripción                                                                                                                                                                                                   |
-| --------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Solo costo reclamado  | `tec`   | La transacción no logró su propósito previsto, pero el costo de la transacción fue destruido. Este resultado solo es definitivo en un ledger validado.                                                        |
-| Fallo                 | `tef`   | La transacción no puede aplicarse al ledger actual (en progreso) del servidor ni a ninguno posterior. Es posible que ya haya sido aplicada, o que las condiciones del ledger la hagan imposible en el futuro. |
-| Error local           | `tel`   | El servidor `rippled` tuvo un error por condiciones locales, como alta carga. Podría obtener una respuesta diferente si reenvía a un servidor diferente o en un momento diferente.                            |
-| Transacción malformada| `tem`   | La transacción no era válida, debido a sintaxis incorrecta, opciones en conflicto, una firma incorrecta, u otra razón.                                                                                        |
-| Reintento             | `ter`   | La transacción no pudo aplicarse, pero podría aplicarse con éxito en un ledger futuro.                                                                                                                        |
-| Éxito                 | `tes`   | (No es un error) La transacción fue exitosa. Este resultado solo es definitivo en un ledger validado.                                                                                                         |
+| Categoría              | Prefijo | Descripción                                                                                                                                                                                                   |
+| ---------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Solo costo reclamado   | `tec`   | La transacción no logró su propósito previsto, pero el costo de la transacción fue destruido. Este resultado solo es definitivo en un ledger validado.                                                        |
+| Fallo                  | `tef`   | La transacción no puede aplicarse al ledger actual (en progreso) del servidor ni a ninguno posterior. Es posible que ya haya sido aplicada, o que las condiciones del ledger la hagan imposible en el futuro. |
+| Error local            | `tel`   | El servidor `rippled` tuvo un error por condiciones locales, como alta carga. Podría obtener una respuesta diferente si reenvía a un servidor diferente o en un momento diferente.                            |
+| Transacción malformada | `tem`   | La transacción no era válida, debido a sintaxis incorrecta, opciones en conflicto, una firma incorrecta, u otra razón.                                                                                        |
+| Reintento              | `ter`   | La transacción no pudo aplicarse, pero podría aplicarse con éxito en un ledger futuro.                                                                                                                        |
+| Success                | `tes`   | (No es un error) La transacción fue exitosa. Este resultado solo es definitivo en un ledger validado.                                                                                                         |
 
 El servidor `rippled` reintenta automáticamente las transacciones fallidas. Es importante no asumir que una transacción ha fallado completamente basándose en un resultado provisional de fallo. Una transacción puede tener éxito más tarde a menos que su éxito o fallo sea definitivo.
 
@@ -28,10 +29,10 @@ La respuesta del [método submit][] contiene un resultado provisional del servid
 
 La respuesta de `submit` contiene los siguientes campos:
 
-| Campo                   | Valor          | Descripción                                                                                                                                               |
-| ----------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `engine_result`         | String         | Un código que indica el resultado de la transacción, como `tecPATH_DRY`.                                                                                  |
-| `engine_result_code`    | Signed Integer | Un número que corresponde al `engine_result`. Los valores exactos están sujetos a cambios sin previo aviso.                                               |
+| Campo                   | Valor          | Descripción                                                                                                                                                 |
+| ----------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `engine_result`         | String         | Un código que indica el resultado de la transacción, como `tecPATH_DRY`.                                                                                    |
+| `engine_result_code`    | Signed Integer | Un número que corresponde al `engine_result`. Los valores exactos están sujetos a cambios sin previo aviso.                                                 |
 | `engine_result_message` | String         | Un mensaje legible por humanos que explica qué ocurrió. Este mensaje está destinado a desarrolladores para diagnosticar problemas, y está sujeto a cambios. |
 
 Si no ocurrió ningún error al enviar y aplicar la transacción localmente, la respuesta se ve así:

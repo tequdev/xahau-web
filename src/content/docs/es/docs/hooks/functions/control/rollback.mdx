@@ -1,6 +1,7 @@
 ---
 title: rollback
 ---
+
 import { Aside, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -31,8 +32,7 @@ int64_t rollback (
     uint32_t read_len,
     uint64_t error_code
 );
-````
-
+```
 </TabItem>
 <TabItem label="JavaScript">
 ```javascript
@@ -61,11 +61,11 @@ rollback('¡Rechazado!', 100)
 <Tabs>
 <TabItem label="C">
 
-<table><thead><tr><th>Nombre</th><th>Tipo</th><th width="202">Descripción</th></tr></thead><tbody><tr><td>read_ptr</td><td>uint32_t</td><td>Puntero a una cadena de retorno que se almacenará en los metadatos de ejecución.<br />Puede ser cualquier texto definido por el desarrollador. <em>Puede ser nulo.</em></td></tr><tr><td>read_len</td><td>uint32_t</td><td>Longitud de la cadena de retorno. Máximo 32. <em>Puede ser nulo.</em></td></tr><tr><td>error_code</td><td>uint64_t</td><td>Código de retorno específico del hook que se almacenará en los metadatos.<br /><br />Similar al código de salida de una aplicación en sistemas *nix. Por convención, los errores son valores distintos de cero.</td></tr></tbody></table>
+<table><thead><tr><th>Nombre</th><th>Tipo</th><th width="202">Descripción</th></tr></thead><tbody><tr><td>read_ptr</td><td>uint32_t</td><td>Puntero a una cadena de retorno que se almacenará en los metadatos de ejecución.<br />Puede ser cualquier texto definido por el desarrollador. <em>Puede ser nulo.</em></td></tr><tr><td>read_len</td><td>uint32_t</td><td>Longitud de la cadena de retorno. Máximo 32. <em>Puede ser nulo.</em></td></tr><tr><td>error_code</td><td>uint64_t</td><td>Código de retorno específico del hook que se almacenará en los metadatos.<br /><br />Similar al código de salida de una aplicación en sistemas \*nix. Por convención, los errores son valores distintos de cero.</td></tr></tbody></table>
 </TabItem>
 <TabItem label="JavaScript">
 
-<table><thead><tr><th>Nombre</th><th>Tipo</th><th width="202">Descripción</th></tr></thead><tbody><tr><td>error_msg</td><td>string</td><td>Cadena que se almacenará en los metadatos de ejecución.<br />Puede ser cualquier texto definido por el desarrollador. <em>Puede ser nulo.</em></td></tr><tr><td>error_code</td><td>number</td><td>Código de retorno específico del hook que se almacenará en los metadatos.<br /><br />Similar al código de salida de una aplicación en sistemas *nix. Por convención, los errores son valores distintos de cero.</td></tr></tbody></table>
+<table><thead><tr><th>Nombre</th><th>Tipo</th><th width="202">Descripción</th></tr></thead><tbody><tr><td>error_msg</td><td>string</td><td>Cadena que se almacenará en los metadatos de ejecución.<br />Puede ser cualquier texto definido por el desarrollador. <em>Puede ser nulo.</em></td></tr><tr><td>error_code</td><td>number</td><td>Código de retorno específico del hook que se almacenará en los metadatos.<br /><br />Similar al código de salida de una aplicación en sistemas \*nix. Por convención, los errores son valores distintos de cero.</td></tr></tbody></table>
 </TabItem>
 </Tabs>
 

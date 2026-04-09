@@ -2,11 +2,12 @@
 title: Campo HookOn
 description: Especifica en qué tipos de transacción debe activarse un Hook
 ---
+
 import { LinkCard } from '@astrojs/starlight/components';
 
 ### Comprendiendo el campo HookOn
 
-Cada bit en este entero sin signo de 256 bits indica si el Hook debe ejecutarse para un tipo de transacción concreto. Todos los bits son _activo bajo_ **excepto** el bit 22, que es _activo alto_. Dado que el 22 corresponde a ttHOOK_SET, esto significa que el valor por defecto de todos los bits en 0 no activará el Hook en una transacción SetHook, pero sí en todos los demás tipos de transacción. Esta es una decisión de diseño intencionada para evitar que los usuarios bloqueen su cuenta de Xahau con un Hook defectuoso.
+Cada bit en este entero sin signo de 256 bits indica si el Hook debe ejecutarse para un tipo de transacción concreto. Todos los bits son *activo bajo* **excepto** el bit 22, que es *activo alto*. Dado que el 22 corresponde a ttHOOK_SET, esto significa que el valor por defecto de todos los bits en 0 no activará el Hook en una transacción SetHook, pero sí en todos los demás tipos de transacción. Esta es una decisión de diseño intencionada para evitar que los usuarios bloqueen su cuenta de Xahau con un Hook defectuoso.
 
 Los bits se numeran de derecha a izquierda:
 
@@ -19,7 +20,7 @@ Ejemplos (asumiendo un entero sin signo de 256 bits):
 
 ```c
 ~(1ULL << 22) /* todos los bits son 1 excepto el bit 22 que es 0 */
-````
+```
 
 2. Si queremos desactivar el Hook en todo excepto ttPAYMENT:
 

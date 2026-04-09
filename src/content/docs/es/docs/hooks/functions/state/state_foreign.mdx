@@ -1,9 +1,8 @@
 ---
 title: state_foreign
-description: >-
-  Recuperar los datos apuntados, en otra cuenta, por una clave de Hook State y
-  escribirlos en un buffer de salida
+description: Recuperar los datos apuntados, en otra cuenta, por una clave de Hook State y escribirlos en un buffer de salida
 ---
+
 import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 ### Comportamiento
@@ -36,8 +35,7 @@ int64_t state_foreign (
     uint32_t aread_ptr,
     uint32_t aread_len  
 );
-````
-
+```
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -80,16 +78,16 @@ if (typeof blacklist_status === 'number')
 
 <Tabs>
 <TabItem label="C">
-| Nombre     | Tipo     | Descripción                                                                 |
-| ---------- | -------- | --------------------------------------------------------------------------- |
-| write_ptr  | uint32_t | Puntero al buffer donde escribir los datos del Hook State                  |
-| write_len  | uint32_t | Longitud del buffer de escritura                                           |
-| kread_ptr  | uint32_t | Puntero a un buffer que contiene la clave del Hook State                   |
-| kread_len  | uint32_t | Longitud de la clave (debe ser 32)                                         |
-| nread_ptr  | uint32_t | Puntero al buffer que contiene el namespace de 32 bytes                    |
-| nread_len  | uint32_t | Longitud del namespace (debe ser 32)                                       |
-| aread_ptr  | uint32_t | Puntero a un buffer con el Account ID de 20 bytes                          |
-| aread_len  | uint32_t | Longitud del Account ID (debe ser 20)                                      |
+| Nombre    | Tipo     | Descripción                                               |
+| --------- | -------- | --------------------------------------------------------- |
+| write_ptr | uint32_t | Puntero al buffer donde escribir los datos del Hook State |
+| write_len | uint32_t | Longitud del buffer de escritura                          |
+| kread_ptr | uint32_t | Puntero a un buffer que contiene la clave del Hook State  |
+| kread_len | uint32_t | The length of the Hook State key. (Should be 32.)         |
+| nread_ptr | uint32_t | Puntero al buffer que contiene el namespace de 32 bytes   |
+| nread_len | uint32_t | Longitud del namespace (debe ser 32)                      |
+| aread_ptr | uint32_t | Puntero a un buffer con el Account ID de 20 bytes         |
+| aread_len | uint32_t | The length of the Account buffer. (Should always be 20).  |
 
 <Aside type="tip">
 Asegúrate de comprobar el valor de retorno. Una consulta de estado puede fallar por varias razones y el buffer contendrá lo que tuviera antes de la llamada (normalmente ceros).
@@ -97,11 +95,12 @@ Asegúrate de comprobar el valor de retorno. Una consulta de estado puede fallar
 </TabItem>
 
 <TabItem label="JavaScript">
-| Nombre     | Tipo                   | Descripción                                               |
-| ---------- | ---------------------- | --------------------------------------------------------- |
-| key        | ByteArray o HexString  | La clave del Hook State de la que obtener el valor        |
-| namespace  | ByteArray o HexString  | El namespace del Hook donde buscar                        |
-| accountid  | ByteArray o HexString  | El propietario del estado                                 |
+| Nombre    | Tipo                  | Descripción                                        |
+| --------- | --------------------- | -------------------------------------------------- |
+| key       | ByteArray o HexString | La clave del Hook State de la que obtener el valor |
+| namespace | ByteArray o HexString | El namespace del Hook donde buscar                 |
+| accountid | ByteArray o HexString | El propietario del estado                          |
+|           |                       |                                                    |
 </TabItem>
 </Tabs>
 
@@ -109,14 +108,14 @@ Asegúrate de comprobar el valor de retorno. Una consulta de estado puede fallar
 
 <Tabs>
 <TabItem label="C">
-| Tipo     | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| int64_t | <p>Número de bytes escritos en el buffer de salida<br /><br />Si es negativo, error:<br /><code>OUT_OF_BOUNDS</code><br />- punteros fuera de la memoria del hook<br /><br /><code>DOESNT_EXIST</code><br />- la clave de Hook State no tiene valor asociado<br /><br /><code>TOO_BIG</code><br />- la clave supera los 32 bytes<br /><br /><code>TOO_SMALL</code><br />- el buffer es demasiado pequeño<br /><br /><code>INVALID_ACCOUNT</code><br />- la cuenta especificada es inválida o no existe</p> |
+| Tipo    | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| int64_t | <p>The number of bytes written to the write buffer.<br /><br />If negative, an error:<br /><code>OUT_OF_BOUNDS</code><br />- pointers/lengths specified outside of hook memory.<br /><br /><code>DOESNT_EXIST</code><br />- the specified Hook State key doesn't have an associated value on the ledger at the time of the call.<br /><br /><code>TOO_BIG</code><br />- the key specified by <code>read_ptr</code> and <code>read_len</code> was larger than 32 bytes.<br /><br /><code>TOO_SMALL</code><br />- the output buffer was too small to store the Hook State data.<br /><br /><code>INVALID_ACCOUNT</code><br />- the account specified at <code>aread_ptr</code> is invalid or does not exist.</p> |
 </TabItem>
 
 <TabItem label="JavaScript">
-| Tipo                   | Descripción                                               |
-| ---------------------- | --------------------------------------------------------- |
-| ErrorCode o ByteArray  | Devuelve un código de error o el valor del Hook State     |
+| Tipo                  | Descripción                                           |
+| --------------------- | ----------------------------------------------------- |
+| ErrorCode o ByteArray | Devuelve un código de error o el valor del Hook State |
 </TabItem>
 </Tabs>

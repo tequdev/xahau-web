@@ -1,6 +1,7 @@
 ---
 title: Consideraciones
 ---
+
 ## Marcadores
 
 Algunos métodos devuelven más datos de los que caben eficientemente en una sola respuesta. Cuando los resultados superan el límite de la respuesta, se incluye un campo `marker` en la respuesta. Este campo le permite recuperar páginas adicionales de datos mediante solicitudes posteriores. Para continuar obteniendo datos, incluya el valor `marker` de la respuesta anterior en su próxima solicitud. Si una respuesta no incluye un `marker`, significa que ha llegado al final del conjunto de datos.

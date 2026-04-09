@@ -1,12 +1,11 @@
 ---
 title: Cron
-description: >-
-  La pseudo-transacción Cron es insertada automáticamente por el motor Cron
-  cuando está programada la ejecución de un Hook.
+description: La pseudo-transacción Cron es insertada automáticamente por el motor Cron cuando está programada la ejecución de un Hook.
 ---
-\[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/Cron.cpp)]
 
-_(Añadido por la [enmienda Cron][].)_
+[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/Cron.cpp)]
+
+*(Añadido por la [enmienda Cron][].)*
 
 La pseudo-transacción `Cron` es insertada automáticamente en el ledger por el motor Cron cuando está programada la ejecución de un Hook. Esta pseudo-transacción desencadena la ejecución del Hook en la cuenta especificada en el campo `Owner`.
 
@@ -27,22 +26,22 @@ La pseudo-transacción `Cron` es insertada automáticamente en el ledger por el 
 
 ### Campos
 
-| Campo           | Tipo JSON | \[Tipo Interno]\[] | Descripción |
-| --------------- | --------- | ------------------- | ----------- |
-| `Owner`         | String    | AccountID           | La cuenta propietaria de la ejecución del Hook programada. Esta es la cuenta que será invocada cuando el cron se ejecute. |
-| `LedgerSequence`| Number    | UInt32              | El \[índice de ledger]\[] donde aparece esta pseudo-transacción. Esto distingue la pseudo-transacción de otras ocurrencias del mismo cambio. |
+| Campo            | Tipo JSON | [Tipo Interno][] | Descripción                                                                                                                                |
+| ---------------- | --------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Owner`          | String    | AccountID        | La cuenta propietaria de la ejecución del Hook programada. Esta es la cuenta que será invocada cuando el cron se ejecute.                  |
+| `LedgerSequence` | Number    | UInt32           | El [índice de ledger][] donde aparece esta pseudo-transacción. Esto distingue la pseudo-transacción de otras ocurrencias del mismo cambio. |
 
 ### Campos Comunes
 
 Como pseudo-transacción, `Cron` utiliza los valores estándar de pseudo-transacción para los campos comunes:
 
-| Campo           | Valor |
-| --------------- | ----- |
+| Campo           | Valor                                          |
+| --------------- | ---------------------------------------------- |
 | `Account`       | `rrrrrrrrrrrrrrrrrrrrrhoLvTp` (`ACCOUNT_ZERO`) |
-| `Fee`           | `0` |
-| `Sequence`      | `0` |
-| `SigningPubKey` | `""` (cadena vacía) |
-| `TxnSignature`  | `""` (cadena vacía) |
+| `Fee`           | `0`                                            |
+| `Sequence`      | `0`                                            |
+| `SigningPubKey` | `""` (cadena vacía)                            |
+| `TxnSignature`  | `""` (cadena vacía)                            |
 
 ### Comportamiento de Ejecución
 

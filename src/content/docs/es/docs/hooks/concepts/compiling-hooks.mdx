@@ -1,6 +1,7 @@
 ---
 title: Compilación de Hooks
 ---
+
 import { Aside } from '@astrojs/starlight/components';
 
 ### Restricciones
@@ -9,19 +10,19 @@ Todos los Hooks se compilan en un único [módulo de WebAssembly](https://webass
 
 Un Hook siempre implementa y exporta exactamente una o ambas de las siguientes funciones:
 
-`int64_t hook(uint32_t ctx) { ... }` _obligatoria_
+`int64_t hook(uint32_t ctx) { ... }` *obligatoria*
 
 * Se ejecuta cuando una transacción entra o sale de la cuenta en la que está configurado el Hook (`ctx = 0`) o
 * Se ejecuta cuando se ejecuta como un [Participante Transaccional Débil](/es/docs/hooks/concepts/weak-and-strong) (`ctx > 0`).
 
-`int64_t cbak(uint32_t ctx) { ... }` _opcional_
+`int64_t cbak(uint32_t ctx) { ... }` *opcional*
 
 * Se ejecuta cuando una transacción emitida es aceptada con éxito en un ledger (`ctx = 0`) o
 * Se ejecuta cuando una transacción emitida no puede ser aceptada en ningún ledger (`ctx = 1`).
 
 Los Hooks no pueden definir otras funciones. En su lugar, deben hacer un uso ingenioso de macros para realizar todos sus cálculos dentro de estas dos funciones. Esto forma parte de una restricción computacional diseñada para mantener predecible el tiempo de ejecución de los Hooks.
 
-Además, los Hooks no disponen de memoria _heap_. Toda la memoria necesaria debe reservarse y utilizarse en la pila (_stack_).
+Además, los Hooks no disponen de memoria *heap*. Toda la memoria necesaria debe reservarse y utilizarse en la pila (*stack*).
 
 ### Ejemplo
 
@@ -43,7 +44,7 @@ int64_t hook(uint32_t ctx)
     accept (0,0,0); 
     return 0;
 }
-````
+```
 
 <Aside type="tip">
 Con fines educativos, el ejemplo anterior no incluye deliberadamente `hookapi.h` (que normalmente utilizarían los desarrolladores).
@@ -51,7 +52,7 @@ Con fines educativos, el ejemplo anterior no incluye deliberadamente `hookapi.h`
 
 ### Compilación
 
-Una [variedad de compiladores](https://www.google.com/search?q=webassembly+compiler+C) puede generar WebAssembly válido a partir de un archivo fuente en C. Una vez compilado, un Hook existe como un archivo binario `.wasm`. Este contiene un módulo de WebAssembly. Utilizando `wasmcc` para compilar y la herramienta `wasm2wat` para convertirlo a una forma legible por humanos, este binario puede representarse en formato comprensible. A continuación se muestra el resultado de compilación del ejemplo anterior.
+Una [variedad de compiladores](https://www.google.com/search?q=webassembly+compiler+C) puede generar WebAssembly válido a partir de un archivo fuente en C. Una vez compilado, un Hook existe como un archivo binario `.wasm`. Once compiled, a Hook exists as a binary `.wasm` file. Este contiene un módulo de WebAssembly. Utilizando `wasmcc` para compilar y la herramienta `wasm2wat` para convertirlo a una forma legible por humanos, este binario puede representarse en formato comprensible. A continuación se muestra el resultado de compilación del ejemplo anterior.
 
 ```
 (module

@@ -8,19 +8,9 @@ Para una documentación completa, consulta los archivos de configuración de eje
 
 ## Bases de datos en memoria
 
-Los usuarios que buscan maximizar el rendimiento pueden ejecutar las bases de datos en memoria en lugar de almacenamiento físico. Sin embargo:
+Los usuarios que buscan maximizar el rendimiento pueden ejecutar las bases de datos en memoria en lugar de almacenamiento físico. Memory databases are not suited for machines storing history, as the databases are not persistent across xahaud restarts. Likewise, the amount of history stored is contingent on available system memory. Thus, `online_delete` and `advisory_delete` are required in the `xahaud.cfg` to prevent out of memory errors. When using a memory database, it is advisable to disable SWAP, as SWAP writes the contents of memory to disk, thereby potentially defeating the benefits obtained by storing the database in memory.
 
-* No son persistentes tras reiniciar xahaud
-* La cantidad de historial depende de la memoria disponible
-
-Por ello, es obligatorio usar:
-
-* `online_delete`
-* `advisory_delete`
-
-Además, se recomienda desactivar SWAP para evitar que la memoria se escriba en disco.
-
-Configuración:
+To enable the memory database, edit the `xahaud.cfg` file:
 
 ```
 
@@ -36,53 +26,26 @@ advisory_delete=0
 
 ## Clustering
 
-El clustering permite que múltiples servidores xahaud confíen entre sí y compartan carga.
+El clustering permite que múltiples servidores xahaud confíen entre sí y compartan carga. Properly clustered servers can share information about malicious or problematic websocket, rpc, and peer connections, while also automatically propagating submitted transactions throughout the cluster. Thus, if a transaction is submitted on a sever with a higher load than the transaction's fee allows for, the transaction will still propagate to other servers in the cluster, thereby increasing the probability that the transaction is included in an upcoming ledger.
 
-Beneficios:
+Administrators operating xahaud validators can benefit from clustering, as the cluster provides connectivity for the highly secure validator, thereby eliminating the need for the validator to connect to unknown or untrusted servers.
 
-* Compartir información sobre conexiones maliciosas
-* Propagar transacciones automáticamente
-* Mayor probabilidad de inclusión en el ledger
-* Mejor conectividad para validadores seguros
+Server operators should not cluster their servers with servers outside of their own control. Likewise, clustered servers should have low latency connections, ideally being located in the same data center.
 
-Recomendaciones:
+Generating cluster seeds (public/private keys) is done via the `validation_create` [API method](/docs/features/http-websocket-apis/admin-api-methods). While the method name includes the term 'validation', this method is not used to [create the keys](/docs/infrastructure/enabling-validation) used to sign validation messages. Instead, it is used to create keys to identify any xahaud server, validating or non-validating.
 
-* No conectar con servidores externos
-* Baja latencia (idealmente mismo datacenter)
+Crear cluster
 
-### Crear cluster
+1. On each xahaud instance that will be included in the cluster, generate a public key and seed: `./xahaud validation_create`
+2. Open each server's `xahaud.cfg` file, and add or edit the following sections:
+   * `[ips_fixed]` - Include the IPv4/6 addresses and peer listening ports (e.g., `10.1.1.2 21337`) for other servers that will be in the cluster. The listening port is defined under the `[port_peer]` stanza in the `xahaud.cfg` file on the server listening for incoming connections. The default listening port for the main Xahau Network is `21337`.
+   * `[node_seed]` - The output in the `validation_seed` field from the `validation_create` command. This is a private key, and it must be installed on the same server on which it was generated.
+   * `[cluster_nodes]` - The output from the `validation_public_key` field of the `validation_create` command. This is a public key, and it must be installed on peer servers, not the server on which it was generated.
+3. Restart xahaud on each server in the cluster: `systemctl restart xahaud`
+4. Backup each server's `xahaud.cfg`.
+5. Verify connectivity among clustered peers via the [peers](/docs/features/http-websocket-apis/admin-api-methods) API method: `./xahaud peers`
 
-1. Generar claves en cada nodo:
-
-```
-
-./xahaud validation_create
-
-```
-
-2. Configurar `xahaud.cfg`:
-
-* `[ips_fixed]`: IP y puerto de peers
-* `[node_seed]`: clave privada
-* `[cluster_nodes]`: claves públicas de peers
-
-3. Reiniciar:
-
-```
-
-systemctl restart xahaud
-
-```
-
-4. Verificar:
-
-```
-
-./xahaud peers
-
-```
-
-### Ejemplo
+The cluster section of a `xahaud.cfg` file might look like this:
 
 ```
 

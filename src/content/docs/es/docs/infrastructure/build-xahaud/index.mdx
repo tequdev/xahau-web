@@ -19,7 +19,7 @@ Cuando los desarrolladores escriben software, lo hacen en lenguajes de programac
 
 Este proceso se complica porque los desarrolladores suelen depender de software escrito por otros, llamados "dependencias", ya que un software necesita de otro para funcionar. Para que estas dependencias formen parte del producto final, deben ser "enlazadas" antes de la compilación. Este proceso puede ser intensivo, ya que las dependencias también pueden tener sus propias dependencias, generando múltiples capas. Para simplificar esto, se utilizan herramientas como Conan, que ayudan a localizar, configurar y enlazar dependencias.
 
-Todo el proceso de gestionar dependencias, compilar el software y ejecutar pruebas se denomina "build".
+The entire process of ensuring dependencies are met, compiling software into a machine optimized format, and running tests against the final product is called "building".
 
 Dado que xahaud es [software de código abierto publicado en GitHub](https://github.com/Xahau/xahaud), cualquiera puede ver, auditar, modificar, compilar y ejecutar el código. Compilar desde el código fuente garantiza que el software ejecutado corresponde exactamente al código público auditado. Por ello, los operadores de validadores que priorizan la seguridad deberían considerar este enfoque.
 
@@ -29,17 +29,17 @@ Para asegurar la compatibilidad, es importante utilizar versiones específicas d
 
 Requisitos actuales para compilar xahaud:
 
-| Dependencia | Versión |
-|------------|---------|
-| Python3    | >= 3.7  |
-| GCC / G++  | >= 14.x |
-| CMake      | >= 3.16 |
-| Conan2     | 2.x     |
-| openssl    | 1.1.1   |
-| boost      | 1.86.0  |
-| SQLite3    | 3.42.0  |
-| Snappy*    | 1.1.10  |
-| SOCI*      | 4.0.3   |
-| WasmEdge*  | 0.11.2  |
+| Dependencia | Version  |
+| :---------- | :------- |
+| Python3     | > = 3.7  |
+| GCC / G++   | > = 14.x |
+| CMake       | > = 3.16 |
+| Conan2      | 2.x      |
+| openssl     | 1.1.1    |
+| boost       | 1.86.0   |
+| SQLite3     | 3.42.0   |
+| Snappy\*    | 1.1.10   |
+| SOCI\*      | 4.0.3    |
+| WasmEdge\*  | 0.11.2   |
 
 \* Incluidos en el repositorio GitHub de Xahau/xahaud.
