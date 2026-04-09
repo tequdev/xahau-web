@@ -2,6 +2,7 @@
 title: etxn_nonce
 description: Genera un nonce de 32 bytes para usar en una transacción emitida
 ---
+
 import { Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 
 ### Conceptos
@@ -29,7 +30,8 @@ int64_t etxn_nonce (
     uint32_t write_ptr,
     uint32_t write_len
 );
-````
+```
+
 
 </TabItem>
 
@@ -49,6 +51,8 @@ uint8_t n[32];
 int64_t bytes_written = 
     etxn_nonce(n, 32);
 ```
+
+
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -62,10 +66,12 @@ const nonce = etxn_nonce()
 
 <Tabs>
 <TabItem label="C">
-| Nombre     | Tipo      | Descripción                                                                                 |
-| ---------- | --------- | ------------------------------------------------------------------------------------------- |
-| write_ptr  | uint32_t  | Puntero a un buffer de tamaño adecuado para almacenar la salida. Debe ser al menos 32 bytes |
-| write_len  | uint32_t  | Longitud del buffer de salida                                                               |
+
+
+| Nombre    | Tipo     | Descripción                                                                                 |
+| --------- | -------- | ------------------------------------------------------------------------------------------- |
+| write_ptr | uint32_t | Puntero a un buffer de tamaño adecuado para almacenar la salida. Debe ser al menos 32 bytes |
+| write_len | uint32_t | Longitud del buffer de salida                                                               |
 </TabItem>
 
 <TabItem label="JavaScript">
@@ -81,6 +87,6 @@ Sin parámetros
 </TabItem>
 
 <TabItem label="JavaScript">
-<table><thead><tr><th width="187">Tipo</th><th>Descripción</th></tr></thead><tbody><tr><td>ErrorCode \| ByteArray</td><td>Devuelve un ErrorCode si hay un error, o un array con el valor del nonce en caso de éxito.</td></tr></tbody></table>
+<table><thead><tr><th width="187">Tipo</th><th>Descripción</th></tr></thead><tbody><tr><td>ErrorCode | ByteArray</td><td>Devuelve un ErrorCode si hay un error, o un array con el valor del nonce en caso de éxito.</td></tr></tbody></table>
 </TabItem>
 </Tabs>
