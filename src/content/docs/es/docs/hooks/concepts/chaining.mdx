@@ -1,11 +1,12 @@
 ---
-title: Encadenamiento
+title: Chaining
 description: Encadena múltiples hooks para realizar tareas más útiles
 ---
+
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="tip" title="Filosofía de diseño de Hooks">
-_Cada Hook debe hacer una sola cosa, y hacerla realmente bien._
+*Cada Hook debe hacer una sola cosa, y hacerla realmente bien.*
 </Aside>
 
 ### Historia
@@ -14,7 +15,7 @@ En los primeros días de los Hooks, solo era posible instalar un Hook por cuenta
 
 Esto iba en contra de la Filosofía de diseño de Hooks, por lo que se introdujo el Encadenamiento de Hooks.
 
-### Encadenamiento
+### Chaining
 
 Una cadena de Hooks es una secuencia de hasta **10** Hooks instalados en una cuenta de Xahau.
 
@@ -44,4 +45,4 @@ Las cadenas de Hooks se ejecutan de forma [fuerte](/es/docs/hooks/concepts/weak-
 
 1. Ejecución `cbak` si se trata de una transacción emitida.
 2. Participantes transaccionales débiles que hayan optado por permitir una [Collect Call](/es/docs/hooks/concepts/collect-call). El orden de ejecución es por orden de llegada según el evento que provocó que el participante fuera marcado (como el pathing).
-3. Cualquier Hook marcado como _Again as Weak_ (AAW). El orden de ejecución para AAW es primero numérico según el ID de la cuenta y luego numérico según la posición del Hook.
+3. Cualquier Hook marcado como *Again as Weak* (AAW). El orden de ejecución para AAW es primero numérico según el ID de la cuenta y luego numérico según la posición del Hook.
