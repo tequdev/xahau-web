@@ -1,12 +1,11 @@
 ---
 title: Import
-description: >-
-  Import es una nueva transacción que acepta un XPOP de la cadena principal XRPL
-  (network_id=0) o Testnet (network_id=1) y proporciona sincronización de cuentas.
+description: Import es una nueva transacción que acepta un XPOP de la cadena principal XRPL (network_id=0) o Testnet (network_id=1) y proporciona sincronización de cuentas.
 ---
-\[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
 
-_(Añadido por la enmienda \[Import]\[].)_
+[[Source](https://github.com/Xahau/xahaud/blob/dev/src/ripple/app/tx/impl/URIToken.cpp)]
+
+*(Añadido por la enmienda [Import][].)*
 
 ### Ejemplo
 
@@ -22,11 +21,11 @@ _(Añadido por la enmienda \[Import]\[].)_
 
 ### Campos
 
-| Campo         | Tipo JSON | \[Tipo Interno]\[] | Descripción                                                  |
-| ------------- | --------- | ------------------- | ------------------------------------------------------------ |
-| `Blob`        | String    | Blob                | Valor hex que representa un XPOP                             |
-| `Issuer`      | String    | AccountID           | (Opcional) Dirección que puede usarse dentro del Hook.       |
-| `Destination` | String    | AccountID           | (Opcional) Dirección que puede usarse dentro del Hook.       |
+| Campo         | Tipo JSON | [Tipo Interno][] | Descripción                                            |
+| ------------- | --------- | ---------------- | ------------------------------------------------------ |
+| `Blob`        | String    | Blob             | Valor hex que representa un XPOP                       |
+| `Issuer`      | String    | AccountID        | (Opcional) Dirección que puede usarse dentro del Hook. |
+| `Destination` | String    | AccountID        | (Opcional) Dirección que puede usarse dentro del Hook. |
 
 ### Casos de Error
 
@@ -36,7 +35,7 @@ _(Añadido por la enmienda \[Import]\[].)_
 
 ### Notas
 
-_Se recomienda que si usa una `SignerList` o `RegularKey` para firmar sus transacciones, vincule sus cuentas **PRIMERO** antes de intentar hacer B2M de XAH_.
+*Se recomienda que si usa una `SignerList` o `RegularKey` para firmar sus transacciones, vincule sus cuentas **PRIMERO** antes de intentar hacer B2M de XAH*.
 
 * Si la transacción interna (xpop) es `AccountSet`, los indicadores existentes de la mainnet se transferirán a la nueva red.
 * Si la transacción interna (xpop) es `SetRegularKey` con el campo `RegularKey` omitido o vacío, y no existe una lista de firmantes para la cuenta, entonces el indicador `lsfDisableMaster` se establecerá en la cuenta.
@@ -61,4 +60,4 @@ Una transacción `Payment` en mainnet al Emisor resultará en una transacción `
 
 > c hook: https://example.com
 
-_Tenga en cuenta que el proceso de importación para el emisor involucra tipos de transacciones específicas y requiere una configuración cuidadosa. Siempre asegúrese de que los hooks estén correctamente configurados y que las transacciones sean válidas para las operaciones previstas._
+*Tenga en cuenta que el proceso de importación para el emisor involucra tipos de transacciones específicas y requiere una configuración cuidadosa. Siempre asegúrese de que los hooks estén correctamente configurados y que las transacciones sean válidas para las operaciones previstas.*
